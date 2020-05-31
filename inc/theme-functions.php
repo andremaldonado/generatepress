@@ -351,3 +351,12 @@ function generate_get_media_query( $name ) {
 
 	return $queries[ $name ];
 }
+
+/**
+ * Define whether we're using GeneratePress Lite or not.
+ *
+ * @since 3.0
+ */
+function generate_is_lite() {
+	return get_option( 'generatepress_is_lite', false );
+}

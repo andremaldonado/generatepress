@@ -59,7 +59,7 @@
 					item.classList.add( 'sfHover' );
 				}, 50 );
 
-				if ( ! document.body.classList.contains( 'nav-aligned-center' ) ) {
+				if ( ! document.body.classList.contains( 'nav-aligned-center' ) && ! nav.classList.contains( 'nav-align-center' ) ) {
 					item.classList.add( 'close-search' );
 				} else {
 					item.style.opacity = 0;

@@ -101,8 +101,22 @@ if ( ! function_exists( 'generate_add_footer_info' ) ) {
 function generate_do_footer_widget( $widget_width, $widget ) {
 	$widget_width = apply_filters( "generate_footer_widget_{$widget}_width", $widget_width );
 	$tablet_widget_width = apply_filters( "generate_footer_widget_{$widget}_tablet_width", '50' );
+
+	$widget_classes = sprintf(
+		'footer-widget-%s',
+		absint( $widget )
+	);
+
+	if ( ! generate_is_lite() ) {
+		$widget_classes = sprintf(
+			'footer-widget-%1$s grid-parent grid-%2$s tablet-grid-%3$s mobile-grid-100',
+			absint( $widget ),
+			absint( $widget_width ),
+			absint( $tablet_widget_width )
+		);
+	}
 	?>
-	<div class="footer-widget-<?php echo absint( $widget ); ?> grid-parent grid-<?php echo absint( $widget_width ); ?> tablet-grid-<?php echo absint( $tablet_widget_width ); ?> mobile-grid-100">
+	<div class="<?php echo $widget_classes; // phpcs:ignore ?>">
 		<?php dynamic_sidebar( 'footer-' . absint( $widget ) ); ?>
 	</div>
 	<?php

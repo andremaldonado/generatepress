@@ -25,11 +25,15 @@ if ( ! function_exists( 'generate_construct_header' ) ) {
 				 * generate_before_header_content hook.
 				 *
 				 * @since 0.1
+				 * @hooked generate_add_site_logo - 5
+				 * @hooked generate_add_site_branding - 10
 				 */
 				do_action( 'generate_before_header_content' );
 
-				// Add our main header items.
-				generate_header_items();
+				if ( ! generate_is_lite() ) {
+					// Add our main header items.
+					generate_header_items();
+				}
 
 				/**
 				 * generate_after_header_content hook.
@@ -37,45 +41,13 @@ if ( ! function_exists( 'generate_construct_header' ) ) {
 				 * @since 0.1
 				 *
 				 * @hooked generate_add_navigation_float_right - 5
+				 * @hooked generate_add_header_widget - 10
 				 */
 				do_action( 'generate_after_header_content' );
 				?>
 			</div><!-- .inside-header -->
 		</header><!-- #masthead -->
 		<?php
-	}
-}
-
-if ( ! function_exists( 'generate_header_items' ) ) {
-	/**
-	 * Build the header contents.
-	 * Wrapping this into a function allows us to customize the order.
-	 *
-	 * @since 1.2.9.7
-	 */
-	function generate_header_items() {
-		$order = apply_filters(
-			'generate_header_items_order',
-			array(
-				'header-widget',
-				'site-branding',
-				'logo',
-			)
-		);
-
-		foreach ( $order as $item ) {
-			if ( 'header-widget' === $item ) {
-				generate_construct_header_widget();
-			}
-
-			if ( 'site-branding' === $item ) {
-				generate_construct_site_title();
-			}
-
-			if ( 'logo' === $item ) {
-				generate_construct_logo();
-			}
-		}
 	}
 }
 
@@ -236,6 +208,101 @@ if ( ! function_exists( 'generate_construct_site_title' ) ) {
 	}
 }
 
+if ( ! function_exists( 'generate_construct_header_widget' ) ) {
+	/**
+	 * Build the header widget.
+	 *
+	 * @since 1.3.28
+	 */
+	function generate_construct_header_widget() {
+		if ( is_active_sidebar( 'header' ) ) :
+			?>
+			<div class="header-widget">
+				<?php dynamic_sidebar( 'header' ); ?>
+			</div>
+			<?php
+		endif;
+	}
+}
+
+add_action( 'generate_before_header_content', 'generate_do_site_logo', 5 );
+/**
+ * Add the site logo to our header.
+ * Only added if we aren't using floats to preserve backwards compatibility.
+ *
+ * @since 3.0
+ */
+function generate_do_site_logo() {
+	if ( ! generate_is_lite() ) {
+		return;
+	}
+
+	generate_construct_logo();
+}
+
+add_action( 'generate_before_header_content', 'generate_do_site_branding' );
+/**
+ * Add the site branding to our header.
+ * Only added if we aren't using floats to preserve backwards compatibility.
+ *
+ * @since 3.0
+ */
+function generate_do_site_branding() {
+	if ( ! generate_is_lite() ) {
+		return;
+	}
+
+	generate_construct_site_title();
+}
+
+add_action( 'generate_after_header_content', 'generate_do_header_widget' );
+/**
+ * Add the header widget to our header.
+ * Only used when grid isn't using floats to preserve backwards compatibility.
+ *
+ * @since 3.0
+ */
+function generate_do_header_widget() {
+	if ( ! generate_is_lite() ) {
+		return;
+	}
+
+	generate_construct_header_widget();
+}
+
+if ( ! function_exists( 'generate_header_items' ) ) {
+	/**
+	 * Build the header contents.
+	 * Wrapping this into a function allows us to customize the order.
+	 *
+	 * @since 1.2.9.7
+	 */
+	function generate_header_items() {
+		$order = apply_filters(
+			'generate_header_items_order',
+			array(
+				'header-widget',
+				'site-branding',
+				'logo',
+			)
+		);
+
+		foreach ( $order as $item ) {
+			if ( 'header-widget' === $item ) {
+				generate_construct_header_widget();
+			}
+
+			if ( 'site-branding' === $item ) {
+				generate_construct_site_title();
+			}
+
+			if ( 'logo' === $item ) {
+				generate_construct_logo();
+			}
+		}
+	}
+}
+
 add_filter( 'generate_header_items_order', 'generate_reorder_inline_site_branding' );
 /**
  * Remove the logo from it's usual position.
@@ -252,23 +319,6 @@ function generate_reorder_inline_site_branding( $order ) {
 		'header-widget',
 		'site-branding',
 	);
-}
-
-if ( ! function_exists( 'generate_construct_header_widget' ) ) {
-	/**
-	 * Build the header widget.
-	 *
-	 * @since 1.3.28
-	 */
-	function generate_construct_header_widget() {
-		if ( is_active_sidebar( 'header' ) ) :
-			?>
-			<div class="header-widget">
-				<?php dynamic_sidebar( 'header' ); ?>
-			</div>
-			<?php
-		endif;
-	}
 }
 
 if ( ! function_exists( 'generate_top_bar' ) ) {

@@ -21,7 +21,7 @@ if ( ! function_exists( 'generate_archive_title' ) ) {
 			return;
 		}
 
-		$clearfix = is_author() ? ' clearfix' : '';
+		$clearfix = is_author() && ! generate_is_lite() ? ' clearfix' : '';
 		?>
 		<header class="page-header<?php echo $clearfix; // phpcs:ignore ?>">
 			<?php

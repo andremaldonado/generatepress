@@ -55,31 +55,54 @@ if ( ! function_exists( 'generate_base_css' ) ) {
 			);
 
 			$css->start_media_query( $media_query );
-				$css->set_selector( '.inside-header' );
-				$css->add_property( 'display', '-ms-flexbox' );
-				$css->add_property( 'display', 'flex' );
+				if ( generate_is_lite() ) { // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
+					$css->set_selector( '.inside-header' );
+					$css->add_property( '-ms-flex-direction', 'column' );
+					$css->add_property( 'flex-direction', 'column' );
 
-				$css->add_property( '-ms-flex-direction', 'column' );
-				$css->add_property( 'flex-direction', 'column' );
+					$css->set_selector( '.site-logo, .site-branding' );
+					$css->add_property( 'margin-bottom', '1.5em' );
 
-				$css->add_property( '-ms-flex-align', 'center' );
-				$css->add_property( 'align-items', 'center' );
+					$css->set_selector( '#site-navigation' );
+					$css->add_property( 'margin', '0 auto' );
 
-				$css->set_selector( '.site-logo, .site-branding' );
-				$css->add_property( 'margin-bottom', '1.5em' );
+					$css->set_selector( '.header-widget' );
+					$css->add_property( 'margin-top', '1.5em' );
 
-				$css->set_selector( '#site-navigation' );
-				$css->add_property( 'margin', '0 auto' );
+					// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
+					if ( 'nav-float-left' === generate_get_option( 'nav_position_setting' ) ) {
+						$css->set_selector( '.nav-float-left .site-logo,.nav-float-left .site-branding,.nav-float-left .header-widget' );
+						$css->add_property( '-webkit-box-ordinal-group', 'initial' );
+						$css->add_property( '-ms-flex-order', 'initial' );
+						$css->add_property( 'order', 'initial' );
+					} // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
+				} else { // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
+					$css->set_selector( '.inside-header' );
+					$css->add_property( 'display', '-ms-flexbox' );
+					$css->add_property( 'display', 'flex' );
 
-				$css->set_selector( '.header-widget' );
-				$css->add_property( 'margin-top', '1.5em' );
+					$css->add_property( '-ms-flex-direction', 'column' );
+					$css->add_property( 'flex-direction', 'column' );
 
-				// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
-				if ( 'nav-float-left' === generate_get_option( 'nav_position_setting' ) ) {
-					$css->set_selector( '.nav-float-left .site-logo,.nav-float-left .site-branding,.nav-float-left .header-widget' );
-					$css->add_property( '-webkit-box-ordinal-group', 'initial' );
-					$css->add_property( '-ms-flex-order', 'initial' );
-					$css->add_property( 'order', 'initial' );
+					$css->add_property( '-ms-flex-align', 'center' );
+					$css->add_property( 'align-items', 'center' );
+
+					$css->set_selector( '.site-logo, .site-branding' );
+					$css->add_property( 'margin-bottom', '1.5em' );
+
+					$css->set_selector( '#site-navigation' );
+					$css->add_property( 'margin', '0 auto' );
+
+					$css->set_selector( '.header-widget' );
+					$css->add_property( 'margin-top', '1.5em' );
+
+					// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
+					if ( 'nav-float-left' === generate_get_option( 'nav_position_setting' ) ) {
+						$css->set_selector( '.nav-float-left .site-logo,.nav-float-left .site-branding,.nav-float-left .header-widget' );
+						$css->add_property( '-webkit-box-ordinal-group', 'initial' );
+						$css->add_property( '-ms-flex-order', 'initial' );
+						$css->add_property( 'order', 'initial' );
+					} // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
 				} // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
 			$css->stop_media_query();
 		}
@@ -87,6 +110,17 @@ if ( ! function_exists( 'generate_base_css' ) ) {
 		if ( generate_get_option( 'logo_width' ) ) {
 			$css->set_selector( '.site-header .header-image' );
 			$css->add_property( 'width', absint( generate_get_option( 'logo_width' ) ), false, 'px' );
+		}
+
+		if ( generate_is_lite() ) {
+			$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
+			$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
+
+			$css->set_selector( '#right-sidebar' );
+			$css->add_property( 'width', absint( $right_sidebar_width ) . '%' );
+
+			$css->set_selector( '#left-sidebar' );
+			$css->add_property( 'width', absint( $right_sidebar_width ) . '%' );
 		}
 
 		do_action( 'generate_base_css', $css );
@@ -193,7 +227,12 @@ if ( ! function_exists( 'generate_advanced_css' ) ) {
 		$css->add_property( 'color', $settings['subnavigation_text_current_color'] );
 		$css->add_property( 'background-color', $settings['subnavigation_background_current_color'] );
 
-		$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .one-container .container, .separate-containers .paging-navigation, .inside-page-header' );
+		if ( generate_is_lite() ) {
+			$css->set_selector( '.inside-article, .comments-area, .page-header, .paging-navigation, .inside-page-header' );
+		} else {
+			$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .one-container .container, .separate-containers .paging-navigation, .inside-page-header' );
+		}
+
 		$css->add_property( 'color', $settings['content_text_color'] );
 		$css->add_property( 'background-color', $settings['content_background_color'] );
 
@@ -475,9 +514,18 @@ if ( ! function_exists( 'generate_font_css' ) ) {
 		$css->add_property( 'font-size', absint( $settings['footer_font_size'] ), $defaults['footer_font_size'], 'px' );
 
 		$css->start_media_query( generate_get_media_query( 'mobile' ) );
-			$mobile_site_title = ( isset( $settings['mobile_site_title_font_size'] ) ) ? $settings['mobile_site_title_font_size'] : '30';
+			// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
+			if ( generate_is_lite() ) {
+				$mobile_site_title = $settings['mobile_site_title_font_size'];
+			} else {
+				$mobile_site_title = ( isset( $settings['mobile_site_title_font_size'] ) ) ? $settings['mobile_site_title_font_size'] : '30';
+			}
+
 			$css->set_selector( '.main-title' );
-			$css->add_property( 'font-size', absint( $mobile_site_title ), false, 'px' );
+
+			if ( ! empty( $mobile_site_title ) ) {
+				$css->add_property( 'font-size', absint( $mobile_site_title ), false, 'px' );
+			}
 
 			$mobile_h1 = ( isset( $settings['mobile_heading_1_font_size'] ) ) ? $settings['mobile_heading_1_font_size'] : '30';
 			$css->set_selector( 'h1' );
@@ -517,7 +565,12 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 		$css->set_selector( '.inside-header' );
 		$css->add_property( 'padding', generate_padding_css( $settings['header_top'], $settings['header_right'], $settings['header_bottom'], $settings['header_left'] ), generate_padding_css( $defaults['header_top'], $defaults['header_right'], $defaults['header_bottom'], $defaults['header_left'] ) );
 
-		$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header, .wp-block-group__inner-container' );
+		if ( generate_is_lite() ) {
+			$css->set_selector( '.inside-article, .comments-area, .page-header, .paging-navigation, .inside-page-header, .wp-block-group__inner-container' );
+		} else {
+			$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header, .wp-block-group__inner-container' );
+		}
+
 		$css->add_property( 'padding', generate_padding_css( $settings['content_top'], $settings['content_right'], $settings['content_bottom'], $settings['content_left'] ), generate_padding_css( $defaults['content_top'], $defaults['content_right'], $defaults['content_bottom'], $defaults['content_left'] ) );
 
 		$content_padding = absint( $settings['content_right'] ) + absint( $settings['content_left'] );
@@ -531,39 +584,68 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 			$css->add_property( 'max-width', generate_get_option( 'container_width' ) + $content_padding, false, 'px' );
 		}
 
-		$css->set_selector( '.one-container.right-sidebar .site-main,.one-container.both-right .site-main' );
-		$css->add_property( 'margin-right', absint( $settings['content_right'] ), absint( $defaults['content_right'] ), 'px' );
+		if ( ! generate_is_lite() ) {
+			$css->set_selector( '.one-container.right-sidebar .site-main,.one-container.both-right .site-main' );
+			$css->add_property( 'margin-right', absint( $settings['content_right'] ), absint( $defaults['content_right'] ), 'px' );
 
-		$css->set_selector( '.one-container.left-sidebar .site-main,.one-container.both-left .site-main' );
-		$css->add_property( 'margin-left', absint( $settings['content_left'] ), absint( $defaults['content_left'] ), 'px' );
+			$css->set_selector( '.one-container.left-sidebar .site-main,.one-container.both-left .site-main' );
+			$css->add_property( 'margin-left', absint( $settings['content_left'] ), absint( $defaults['content_left'] ), 'px' );
 
-		$css->set_selector( '.one-container.both-sidebars .site-main' );
-		$css->add_property( 'margin', generate_padding_css( '0', $settings['content_right'], '0', $settings['content_left'] ), generate_padding_css( '0', $defaults['content_right'], '0', $defaults['content_left'] ) );
+			$css->set_selector( '.one-container.both-sidebars .site-main' );
+			$css->add_property( 'margin', generate_padding_css( '0', $settings['content_right'], '0', $settings['content_left'] ), generate_padding_css( '0', $defaults['content_right'], '0', $defaults['content_left'] ) );
+		}
 
-		$css->set_selector( '.separate-containers .widget, .separate-containers .site-main > *, .separate-containers .page-header, .widget-area .main-navigation' );
-		$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+		if ( generate_is_lite() ) {
+			$css->set_selector( '.widget, .site-main > *, .page-header, .widget-area .main-navigation' );
+			$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
 
-		$css->set_selector( '.separate-containers .site-main' );
-		$css->add_property( 'margin', absint( $settings['separator'] ), $defaults['separator'], 'px' );
+			$css->set_selector( '.site-main' );
+			$css->add_property( 'margin', absint( $settings['separator'] ), $defaults['separator'], 'px' );
 
-		$css->set_selector( '.both-right.separate-containers .inside-left-sidebar' );
-		$css->add_property( 'margin-right', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+			$css->set_selector( '.both-right .inside-left-sidebar' );
+			$css->add_property( 'margin-right', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
 
-		$css->set_selector( '.both-right.separate-containers .inside-right-sidebar' );
-		$css->add_property( 'margin-left', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+			$css->set_selector( '.both-right .inside-right-sidebar' );
+			$css->add_property( 'margin-left', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
 
-		$css->set_selector( '.both-left.separate-containers .inside-left-sidebar' );
-		$css->add_property( 'margin-right', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+			$css->set_selector( '.both-left .inside-left-sidebar' );
+			$css->add_property( 'margin-right', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
 
-		$css->set_selector( '.both-left.separate-containers .inside-right-sidebar' );
-		$css->add_property( 'margin-left', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+			$css->set_selector( '.both-left .inside-right-sidebar' );
+			$css->add_property( 'margin-left', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
 
-		$css->set_selector( '.separate-containers .page-header-image, .separate-containers .page-header-contained, .separate-containers .page-header-image-single, .separate-containers .page-header-content-single' );
-		$css->add_property( 'margin-top', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+			$css->set_selector( '.page-header-image, .page-header-image-single' );
+			$css->add_property( 'margin-top', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
 
-		$css->set_selector( '.separate-containers .inside-right-sidebar, .separate-containers .inside-left-sidebar' );
-		$css->add_property( 'margin-top', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
-		$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+			$css->set_selector( '.inside-right-sidebar, .inside-left-sidebar' );
+			$css->add_property( 'margin-top', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+			$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+		} else {
+			$css->set_selector( '.separate-containers .widget, .separate-containers .site-main > *, .separate-containers .page-header, .widget-area .main-navigation' );
+			$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+
+			$css->set_selector( '.separate-containers .site-main' );
+			$css->add_property( 'margin', absint( $settings['separator'] ), $defaults['separator'], 'px' );
+
+			$css->set_selector( '.both-right.separate-containers .inside-left-sidebar' );
+			$css->add_property( 'margin-right', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+
+			$css->set_selector( '.both-right.separate-containers .inside-right-sidebar' );
+			$css->add_property( 'margin-left', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+
+			$css->set_selector( '.both-left.separate-containers .inside-left-sidebar' );
+			$css->add_property( 'margin-right', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+
+			$css->set_selector( '.both-left.separate-containers .inside-right-sidebar' );
+			$css->add_property( 'margin-left', absint( $settings['separator'] / 2 ), absint( $defaults['separator'] / 2 ), 'px' );
+
+			$css->set_selector( '.separate-containers .page-header-image, .separate-containers .page-header-contained, .separate-containers .page-header-image-single, .separate-containers .page-header-content-single' );
+			$css->add_property( 'margin-top', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+
+			$css->set_selector( '.separate-containers .inside-right-sidebar, .separate-containers .inside-left-sidebar' );
+			$css->add_property( 'margin-top', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+			$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
+		}
 
 		$css->set_selector( '.main-navigation .main-nav ul li a,.menu-toggle,.main-navigation .mobile-bar-items a' );
 		$css->add_property( 'padding-left', absint( $settings['menu_item'] ), absint( $defaults['menu_item'] ), 'px' );
@@ -609,7 +691,12 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 		$css->add_property( 'padding', generate_padding_css( $settings['footer_top'], $settings['footer_right'], $settings['footer_bottom'], $settings['footer_left'] ), generate_padding_css( $defaults['footer_top'], $defaults['footer_right'], $defaults['footer_bottom'], $defaults['footer_left'] ) );
 
 		$css->start_media_query( generate_get_media_query( 'mobile' ) );
-			$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header, .wp-block-group__inner-container' );
+			if ( generate_is_lite() ) {
+				$css->set_selector( '.inside-article, .comments-area, .page-header, .paging-navigation, .inside-page-header, .wp-block-group__inner-container' );
+			} else {
+				$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header, .wp-block-group__inner-container' );
+			}
+
 			$css->add_property( 'padding', generate_padding_css( $settings['mobile_content_top'], $settings['mobile_content_right'], $settings['mobile_content_bottom'], $settings['mobile_content_left'] ) );
 
 			$mobile_content_padding = absint( $settings['mobile_content_right'] ) + absint( $settings['mobile_content_left'] );
@@ -620,18 +707,33 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 
 			// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
 			if ( '' !== $settings['mobile_separator'] ) {
-				$css->set_selector( '.separate-containers .widget, .separate-containers .site-main > *, .separate-containers .page-header' );
-				$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
+				if ( generate_is_lite() ) {
+					$css->set_selector( '.widget, .site-main > *, .page-header' );
+					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
 
-				$css->set_selector( '.separate-containers .site-main' );
-				$css->add_property( 'margin', absint( $settings['mobile_separator'] ), false, 'px' );
+					$css->set_selector( '.site-main' );
+					$css->add_property( 'margin', absint( $settings['mobile_separator'] ), false, 'px' );
 
-				$css->set_selector( '.separate-containers .page-header-image, .separate-containers .page-header-image-single' );
-				$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+					$css->set_selector( '.page-header-image, .page-header-image-single' );
+					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
 
-				$css->set_selector( '.separate-containers .inside-right-sidebar, .separate-containers .inside-left-sidebar' );
-				$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
-				$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
+					$css->set_selector( '.inside-right-sidebar, .inside-left-sidebar' );
+					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
+				} else {
+					$css->set_selector( '.separate-containers .widget, .separate-containers .site-main > *, .separate-containers .page-header' );
+					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
+
+					$css->set_selector( '.separate-containers .site-main' );
+					$css->add_property( 'margin', absint( $settings['mobile_separator'] ), false, 'px' );
+
+					$css->set_selector( '.separate-containers .page-header-image, .separate-containers .page-header-image-single' );
+					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+
+					$css->set_selector( '.separate-containers .inside-right-sidebar, .separate-containers .inside-left-sidebar' );
+					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
+				}
 			} // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
 		$css->stop_media_query();
 
@@ -644,24 +746,26 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 
 		$output = '';
 
-		$generate_settings = wp_parse_args(
-			get_option( 'generate_settings', array() ),
-			generate_get_color_defaults()
-		);
+		if ( ! generate_is_lite() ) {
+			$generate_settings = wp_parse_args(
+				get_option( 'generate_settings', array() ),
+				generate_get_color_defaults()
+			);
 
-		// Find out if the content background color and sidebar widget background color is the same.
-		$sidebar = strtoupper( $generate_settings['sidebar_widget_background_color'] );
-		$content = strtoupper( $generate_settings['content_background_color'] );
+			// Find out if the content background color and sidebar widget background color is the same.
+			$sidebar = strtoupper( $generate_settings['sidebar_widget_background_color'] );
+			$content = strtoupper( $generate_settings['content_background_color'] );
 
-		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-		$colors_match = ( ( $sidebar == $content ) || '' == $sidebar ) ? true : false;
+			// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+			$colors_match = ( ( $sidebar == $content ) || '' == $sidebar ) ? true : false;
 
-		// If they're all 40 (default), remove the padding when one container is set.
-		// This way, the user can still adjust the padding and it will work (unless they want 40px padding).
-		// We'll also remove the padding if there's no color difference between the widgets and content background color.
-		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-		if ( ( '40' == $settings['widget_top'] && '40' == $settings['widget_right'] && '40' == $settings['widget_bottom'] && '40' == $settings['widget_left'] ) && $colors_match ) {
-			$output .= '.one-container .sidebar .widget{padding:0px;}';
+			// If they're all 40 (default), remove the padding when one container is set.
+			// This way, the user can still adjust the padding and it will work (unless they want 40px padding).
+			// We'll also remove the padding if there's no color difference between the widgets and content background color.
+			// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+			if ( ( '40' == $settings['widget_top'] && '40' == $settings['widget_right'] && '40' == $settings['widget_bottom'] && '40' == $settings['widget_left'] ) && $colors_match ) {
+				$output .= '.one-container .sidebar .widget{padding:0px;}';
+			}
 		}
 
 		do_action( 'generate_spacing_css', $css );

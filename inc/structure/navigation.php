@@ -109,7 +109,7 @@ if ( ! function_exists( 'generate_menu_fallback' ) ) {
 
 				if ( 'enable' === $generate_settings['nav_search'] ) {
 					printf(
-						'<li class="search-item"><a aria-label="%1$s" href="#">%2$s</a></li>',
+						'<li class="search-item menu-item-align-right"><a aria-label="%1$s" href="#">%2$s</a></li>',
 						esc_attr__( 'Open Search Bar', 'generatepress' ),
 						generate_get_svg_icon( 'search', true ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
 					);

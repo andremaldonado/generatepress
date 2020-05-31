@@ -206,24 +206,26 @@ if ( ! function_exists( 'generate_customize_register' ) ) {
 			)
 		);
 
-		$wp_customize->add_setting(
-			'generate_settings[inline_logo_site_branding]',
-			array(
-				'default' => $defaults['inline_logo_site_branding'],
-				'type' => 'option',
-				'sanitize_callback' => 'generate_sanitize_checkbox',
-			)
-		);
+		if ( ! generate_is_lite() ) {
+			$wp_customize->add_setting(
+				'generate_settings[inline_logo_site_branding]',
+				array(
+					'default' => $defaults['inline_logo_site_branding'],
+					'type' => 'option',
+					'sanitize_callback' => 'generate_sanitize_checkbox',
+				)
+			);
 
-		$wp_customize->add_control(
-			'generate_settings[inline_logo_site_branding]',
-			array(
-				'type' => 'checkbox',
-				'label' => esc_html__( 'Place logo next to title', 'generatepress' ),
-				'section' => 'title_tagline',
-				'active_callback' => 'generate_has_logo_site_branding',
-			)
-		);
+			$wp_customize->add_control(
+				'generate_settings[inline_logo_site_branding]',
+				array(
+					'type' => 'checkbox',
+					'label' => esc_html__( 'Place logo next to title', 'generatepress' ),
+					'section' => 'title_tagline',
+					'active_callback' => 'generate_has_logo_site_branding',
+				)
+			);
+		}
 
 		$wp_customize->add_section(
 			'body_section',
@@ -1043,30 +1045,32 @@ if ( ! function_exists( 'generate_customize_register' ) ) {
 			)
 		);
 
-		$wp_customize->add_setting(
-			'generate_settings[content_layout_setting]',
-			array(
-				'default' => $defaults['content_layout_setting'],
-				'type' => 'option',
-				'sanitize_callback' => 'generate_sanitize_choices',
-				'transport' => 'postMessage',
-			)
-		);
+		if ( ! generate_is_lite() ) {
+			$wp_customize->add_setting(
+				'generate_settings[content_layout_setting]',
+				array(
+					'default' => $defaults['content_layout_setting'],
+					'type' => 'option',
+					'sanitize_callback' => 'generate_sanitize_choices',
+					'transport' => 'postMessage',
+				)
+			);
 
-		$wp_customize->add_control(
-			'generate_settings[content_layout_setting]',
-			array(
-				'type' => 'select',
-				'label' => __( 'Content Layout', 'generatepress' ),
-				'section' => 'generate_layout_container',
-				'choices' => array(
-					'separate-containers' => __( 'Separate Containers', 'generatepress' ),
-					'one-container' => __( 'One Container', 'generatepress' ),
-				),
-				'settings' => 'generate_settings[content_layout_setting]',
-				'priority' => 25,
-			)
-		);
+			$wp_customize->add_control(
+				'generate_settings[content_layout_setting]',
+				array(
+					'type' => 'select',
+					'label' => __( 'Content Layout', 'generatepress' ),
+					'section' => 'generate_layout_container',
+					'choices' => array(
+						'separate-containers' => __( 'Separate Containers', 'generatepress' ),
+						'one-container' => __( 'One Container', 'generatepress' ),
+					),
+					'settings' => 'generate_settings[content_layout_setting]',
+					'priority' => 25,
+				)
+			);
+		}
 
 		$wp_customize->add_setting(
 			'generate_settings[container_alignment]',
@@ -1427,24 +1431,26 @@ if ( ! function_exists( 'generate_customize_register' ) ) {
 			)
 		);
 
-		$wp_customize->add_setting(
-			'generate_settings[combine_css]',
-			array(
-				'default' => $defaults['combine_css'],
-				'type' => 'option',
-				'sanitize_callback' => 'generate_sanitize_checkbox',
-			)
-		);
+		if ( ! generate_is_lite() ) {
+			$wp_customize->add_setting(
+				'generate_settings[combine_css]',
+				array(
+					'default' => $defaults['combine_css'],
+					'type' => 'option',
+					'sanitize_callback' => 'generate_sanitize_checkbox',
+				)
+			);
 
-		$wp_customize->add_control(
-			'generate_settings[combine_css]',
-			array(
-				'type' => 'checkbox',
-				'label' => __( 'Combine CSS', 'generatepress' ),
-				'description' => __( 'Reduce the number of CSS file requests and use a lite version of our grid system.', 'generatepress' ),
-				'section' => 'generate_general_section',
-			)
-		);
+			$wp_customize->add_control(
+				'generate_settings[combine_css]',
+				array(
+					'type' => 'checkbox',
+					'label' => __( 'Combine CSS', 'generatepress' ),
+					'description' => __( 'Reduce the number of CSS file requests and use a lite version of our grid system.', 'generatepress' ),
+					'section' => 'generate_general_section',
+				)
+			);
+		}
 
 		$wp_customize->add_setting(
 			'generate_settings[dynamic_css_cache]',
