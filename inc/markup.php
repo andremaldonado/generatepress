@@ -187,11 +187,7 @@ if ( ! function_exists( 'generate_body_classes' ) ) {
 			}
 		}
 
-		if ( ! generate_is_legacy() ) {
-			if ( 'click' === $navigation_dropdown ) {
-				$classes[] = 'dropdown-click';
-			}
-		} else {
+		if ( generate_is_legacy() ) {
 			if ( 'click' === $navigation_dropdown ) {
 				$classes[] = 'dropdown-click';
 				$classes[] = 'dropdown-click-menu-item';
@@ -487,6 +483,10 @@ if ( ! function_exists( 'generate_navigation_classes' ) ) {
 				$classes[] = 'nav-align-center';
 			} elseif ( 'right' === generate_get_option( 'nav_alignment_setting' ) ) {
 				$classes[] = 'nav-align-right';
+			}
+
+			if ( 'click' === generate_get_option( 'nav_dropdown_type' ) ) {
+				$classes[] = 'dropdown-click';
 			}
 		}
 
