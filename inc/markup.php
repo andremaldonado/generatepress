@@ -146,7 +146,6 @@ if ( ! function_exists( 'generate_body_classes' ) ) {
 		$navigation_location  = generate_get_navigation_location();
 		$navigation_alignment = generate_get_option( 'nav_alignment_setting' );
 		$navigation_dropdown  = generate_get_option( 'nav_dropdown_type' );
-
 		$header_alignment     = generate_get_option( 'header_alignment_setting' );
 		$content_layout       = generate_get_option( 'content_layout_setting' );
 
