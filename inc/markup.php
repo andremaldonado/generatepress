@@ -163,7 +163,7 @@ if ( ! function_exists( 'generate_body_classes' ) ) {
 			$classes[] = 'header-aligned-center';
 		} elseif ( 'right' === $header_alignment ) {
 			$classes[] = 'header-aligned-right';
-		} elseif ( 'left' === $header_alignment ) {
+		} elseif ( 'left' === $header_alignment && generate_is_legacy() ) {
 			$classes[] = 'header-aligned-left';
 		}
 
