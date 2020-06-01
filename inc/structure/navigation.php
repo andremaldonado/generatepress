@@ -286,7 +286,7 @@ if ( ! function_exists( 'generate_dropdown_icon_to_menu_link' ) ) {
 				foreach ( $item->classes as $value ) {
 					if ( 'menu-item-has-children' === $value ) {
 						$arrow = sprintf(
-							'<span class="dropdown-menu-toggle">%1$s</span><button class="dropdown-menu-toggle">%1$s</button>',
+							'<span class="dropdown-menu-toggle" aria-hidden="true">%1$s</span>',
 							generate_get_svg_icon( 'arrow' )
 						);
 
@@ -315,6 +315,33 @@ if ( ! function_exists( 'generate_dropdown_icon_to_menu_link' ) ) {
 
 		return $title;
 	}
+}
+
+add_filter( 'nav_menu_item_args', 'generate_do_submenu_toggle_button', 10, 2 );
+/**
+ * Add our toggle button after the link element.
+ *
+ * @param Object $args Existing args.
+ * @param Object $item Current menu item.
+ */
+function generate_do_submenu_toggle_button( $args, $item ) {
+	if ( generate_is_legacy() ) {
+		return $args;
+	}
+
+	if ( isset( $args->container_class ) && 'main-nav' === $args->container_class ) {
+		$args->after = '';
+
+		if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
+			$args->after .= sprintf(
+				'<button class="dropdown-menu-toggle" aria-label="%2$s" aria-expanded="false">%1$s</button>',
+				generate_get_svg_icon( 'arrow' ),
+				esc_attr__( 'Open Sub-Menu', 'generatepress' )
+			);
+		}
+	}
+
+	return $args;
 }
 
 if ( ! function_exists( 'generate_navigation_search' ) ) {

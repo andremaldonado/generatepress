@@ -172,21 +172,41 @@ if ( ! function_exists( 'generate_advanced_css' ) ) {
 		$css->set_selector( '.main-navigation,.main-navigation ul ul' );
 		$css->add_property( 'background-color', $settings['navigation_background_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul li a,.menu-toggle' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation li a,.main-navigation li button,.menu-toggle' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul li a,.menu-toggle' );
+		}
+
 		$css->add_property( 'color', $settings['navigation_text_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul li:hover > a,.main-navigation .main-nav ul li:focus > a, .main-navigation .main-nav ul li.sfHover > a' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation li:hover > a,.main-navigation li:focus > a, .main-navigation li.sfHover > a,.main-navigation li:hover > button,.main-navigation li:focus > button, .main-navigation li.sfHover > button' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul li:hover > a,.main-navigation .main-nav ul li:focus > a, .main-navigation .main-nav ul li.sfHover > a' );
+		}
+
 		$css->add_property( 'color', $settings['navigation_text_hover_color'] );
 		$css->add_property( 'background-color', $settings['navigation_background_hover_color'] );
 
 		$css->set_selector( 'button.menu-toggle:hover,button.menu-toggle:focus,.main-navigation .mobile-bar-items a,.main-navigation .mobile-bar-items a:hover,.main-navigation .mobile-bar-items a:focus' );
 		$css->add_property( 'color', $settings['navigation_text_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul li[class*="current-menu-"] > a' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation li[class*="current-menu-"] > a, .main-navigation li[class*="current-menu-"] > button' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul li[class*="current-menu-"] > a' );
+		}
+
 		$css->add_property( 'color', $settings['navigation_text_current_color'] );
 		$css->add_property( 'background-color', $settings['navigation_background_current_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul li[class*="current-menu-"] > a:hover,.main-navigation .main-nav ul li[class*="current-menu-"].sfHover > a' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation li[class*="current-menu-"] > a:hover,.main-navigation li[class*="current-menu-"].sfHover > a, .main-navigation li[class*="current-menu-"]:hover > button,.main-navigation li[class*="current-menu-"].sfHover > button' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul li[class*="current-menu-"] > a:hover,.main-navigation .main-nav ul li[class*="current-menu-"].sfHover > a' );
+		}
+
 		$css->add_property( 'color', $settings['navigation_text_current_color'] );
 		$css->add_property( 'background-color', $settings['navigation_background_current_color'] );
 
@@ -212,18 +232,38 @@ if ( ! function_exists( 'generate_advanced_css' ) ) {
 		$css->set_selector( '.main-navigation ul ul' );
 		$css->add_property( 'background-color', $settings['subnavigation_background_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul ul li a' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation ul ul li a, .main-navigation ul ul li button' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul ul li a' );
+		}
+
 		$css->add_property( 'color', $settings['subnavigation_text_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul ul li:hover > a,.main-navigation .main-nav ul ul li:focus > a,.main-navigation .main-nav ul ul li.sfHover > a' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation ul ul li:hover > a,.main-navigation ul ul li:focus > a,.main-navigation ul ul li.sfHover > a,.main-navigation ul ul li:hover > button,.main-navigation ul ul li:focus > button,.main-navigation ul ul li.sfHover > button' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul ul li:hover > a,.main-navigation .main-nav ul ul li:focus > a,.main-navigation .main-nav ul ul li.sfHover > a' );
+		}
+
 		$css->add_property( 'color', $settings['subnavigation_text_hover_color'] );
 		$css->add_property( 'background-color', $settings['subnavigation_background_hover_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul ul li[class*="current-menu-"] > a' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation ul ul li[class*="current-menu-"] > a,.main-navigation ul ul li[class*="current-menu-"] > button' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul ul li[class*="current-menu-"] > a' );
+		}
+
 		$css->add_property( 'color', $settings['subnavigation_text_current_color'] );
 		$css->add_property( 'background-color', $settings['subnavigation_background_current_color'] );
 
-		$css->set_selector( '.main-navigation .main-nav ul ul li[class*="current-menu-"] > a:hover,.main-navigation .main-nav ul ul li[class*="current-menu-"].sfHover > a' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.main-navigation ul ul li[class*="current-menu-"] > a:hover,.main-navigation ul ul li[class*="current-menu-"].sfHover > a,.main-navigation ul ul li[class*="current-menu-"]:hover > button,.main-navigation ul ul li[class*="current-menu-"].sfHover > button' );
+		} else {
+			$css->set_selector( '.main-navigation .main-nav ul ul li[class*="current-menu-"] > a:hover,.main-navigation .main-nav ul ul li[class*="current-menu-"].sfHover > a' );
+		}
+
 		$css->add_property( 'color', $settings['subnavigation_text_current_color'] );
 		$css->add_property( 'background-color', $settings['subnavigation_background_current_color'] );
 
@@ -662,19 +702,21 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 		$css->set_selector( '.navigation-search input' );
 		$css->add_property( 'height', absint( $settings['menu_item_height'] ), absint( $defaults['menu_item_height'] ), 'px' );
 
-		$css->set_selector( '.rtl .menu-item-has-children .dropdown-menu-toggle' );
-		$css->add_property( 'padding-left', absint( $settings['menu_item'] ), false, 'px' );
+		if ( generate_is_legacy() ) {
+			$css->set_selector( '.rtl .menu-item-has-children .dropdown-menu-toggle' );
+			$css->add_property( 'padding-left', absint( $settings['menu_item'] ), false, 'px' );
 
-		$css->set_selector( '.menu-item-has-children .dropdown-menu-toggle' );
-		$css->add_property( 'padding-right', absint( $settings['menu_item'] ), absint( $defaults['menu_item'] ), 'px' );
+			$css->set_selector( '.menu-item-has-children .dropdown-menu-toggle' );
+			$css->add_property( 'padding-right', absint( $settings['menu_item'] ), absint( $defaults['menu_item'] ), 'px' );
 
-		$css->set_selector( '.menu-item-has-children ul .dropdown-menu-toggle' );
-		$css->add_property( 'padding-top', absint( $settings['sub_menu_item_height'] ), absint( $defaults['sub_menu_item_height'] ), 'px' );
-		$css->add_property( 'padding-bottom', absint( $settings['sub_menu_item_height'] ), absint( $defaults['sub_menu_item_height'] ), 'px' );
-		$css->add_property( 'margin-top', '-' . absint( $settings['sub_menu_item_height'] ), '-' . absint( $defaults['sub_menu_item_height'] ), 'px' );
+			$css->set_selector( '.menu-item-has-children ul .dropdown-menu-toggle' );
+			$css->add_property( 'padding-top', absint( $settings['sub_menu_item_height'] ), absint( $defaults['sub_menu_item_height'] ), 'px' );
+			$css->add_property( 'padding-bottom', absint( $settings['sub_menu_item_height'] ), absint( $defaults['sub_menu_item_height'] ), 'px' );
+			$css->add_property( 'margin-top', '-' . absint( $settings['sub_menu_item_height'] ), '-' . absint( $defaults['sub_menu_item_height'] ), 'px' );
 
-		$css->set_selector( '.rtl .main-navigation .main-nav ul li.menu-item-has-children > a' );
-		$css->add_property( 'padding-right', absint( $settings['menu_item'] ), false, 'px' );
+			$css->set_selector( '.rtl .main-navigation .main-nav ul li.menu-item-has-children > a' );
+			$css->add_property( 'padding-right', absint( $settings['menu_item'] ), false, 'px' );
+		}
 
 		$css->set_selector( '.widget-area .widget' );
 		$css->add_property( 'padding', generate_padding_css( $settings['widget_top'], $settings['widget_right'], $settings['widget_bottom'], $settings['widget_left'] ), generate_padding_css( $defaults['widget_top'], $defaults['widget_right'], $defaults['widget_bottom'], $defaults['widget_left'] ) );
@@ -739,11 +781,13 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 
 		$css->stop_media_query();
 
-		// Add spacing back where dropdown arrow should be.
-		// Old versions of WP don't get nice things.
-		if ( version_compare( $GLOBALS['wp_version'], '4.4', '<' ) ) {
-			$css->set_selector( '.main-navigation .main-nav ul li.menu-item-has-children>a, .secondary-navigation .main-nav ul li.menu-item-has-children>a' );
-			$css->add_property( 'padding-right', absint( $settings['menu_item'] ), absint( $defaults['menu_item'] ), 'px' );
+		if ( generate_is_legacy() ) {
+			// Add spacing back where dropdown arrow should be.
+			// Old versions of WP don't get nice things.
+			if ( version_compare( $GLOBALS['wp_version'], '4.4', '<' ) ) {
+				$css->set_selector( '.main-navigation .main-nav ul li.menu-item-has-children>a, .secondary-navigation .main-nav ul li.menu-item-has-children>a' );
+				$css->add_property( 'padding-right', absint( $settings['menu_item'] ), absint( $defaults['menu_item'] ), 'px' );
+			}
 		}
 
 		$output = '';

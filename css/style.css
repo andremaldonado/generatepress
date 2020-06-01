@@ -688,7 +688,7 @@ li.search-item.active {
 	z-index: 9999;
 	width: 200px;
 	text-align: left;
-	top: auto;
+	top: 100%;
 	transition: opacity 80ms linear;
 	transition-delay: 0s;
 	pointer-events: none;
@@ -734,13 +734,21 @@ li.search-item.active {
 	display: inline-block;
 }
 
-.dropdown-click .main-navigation:not(.toggled) ul li:hover > ul:not(.toggled-on),
-.dropdown-click .main-navigation:not(.toggled) ul li.sfHover > ul:not(.toggled-on) {
+.main-navigation.dropdown-click .main-nav > ul > li.menu-item-has-children > a {
+	padding-right: 0;
+}
+
+.main-navigation.dropdown-click:not(.toggled) ul li:hover > ul:not(.toggled-on),
+.main-navigation.dropdown-click:not(.toggled) ul li.sfHover > ul:not(.toggled-on) {
 	display: none;
 }
 
-.dropdown-click .main-navigation ul.toggled-on,
-.dropdown-click .main-navigation ul li.sfHover > ul.toggled-on {
+.main-navigation.dropdown-click ul ul {
+	visibility: hidden;
+}
+
+.main-navigation.dropdown-click ul.toggled-on,
+.main-navigation.dropdown-click ul li.sfHover > ul.toggled-on {
 	left: auto;
 	opacity: 1;
 	visibility: visible;
@@ -749,32 +757,32 @@ li.search-item.active {
 	overflow: visible;
 }
 
-.dropdown-click nav ul ul ul {
+.main-navigation.dropdown-click ul ul ul {
 	background-color: transparent;
 }
 
-.main-navigation .main-nav ul ul li a {
-	line-height: 40px;
+.main-navigation ul ul li a {
+	padding: 10px 20px;
+	line-height: normal;
 }
 
 .nav-float-right .main-navigation ul ul ul {
 	top: 0
 }
 
-nav .main-nav ul li.menu-item-has-children > a {
-	padding-right: 0;
+nav ul li.menu-item-has-children > a {
 	position: relative;
 	display: flex;
 	justify-content: space-between;
+	flex-grow: 1;
 }
 
 .dropdown-menu-toggle {
 	display: inline-block;
-	padding-right: 20px;
 	padding-left: 10px;
 }
 
-.dropdown-click .main-navigation ul ul ul.toggled-on {
+.main-navigation.dropdown-click ul ul ul.toggled-on {
 	left: 0;
 	top: auto;
 	position: relative;
@@ -807,10 +815,10 @@ nav .main-nav ul li.menu-item-has-children > a {
 	left: auto;
 }
 
-.both-left.dropdown-click .widget-area .inside-right-sidebar .main-navigation ul li:hover ul,
-.both-left.dropdown-click .widget-area .inside-right-sidebar .main-navigation ul li.sfHover ul,
-.dropdown-click .widget-area .main-navigation ul li:hover ul,
-.dropdown-click .widget-area .main-navigation ul li.sfHover > ul {
+.both-left .widget-area .inside-right-sidebar .main-navigation.dropdown-click ul li:hover ul,
+.both-left .widget-area .inside-right-sidebar .main-navigation.dropdown-click ul li.sfHover ul,
+.widget-area .main-navigation.dropdown-click ul li:hover ul,
+.widget-area .main-navigation.dropdown-click ul li.sfHover > ul {
 	width: 100%;
 	position: relative;
 	left: 0;
@@ -1929,14 +1937,15 @@ div.top-bar .widget {
 	transform: rotate(90deg);
 }
 
-.dropdown-click .sfHover > a > .dropdown-menu-toggle > .gp-icon svg,
-nav.toggled .sfHover > a > .dropdown-menu-toggle > .gp-icon svg,
-.generate-back-to-top .gp-icon svg {
-	transform: rotate(180deg);
+nav.toggled .sub-menu .dropdown-menu-toggle .gp-icon svg,
+.dropdown-click .sub-menu .dropdown-menu-toggle .gp-icon svg {
+    transform: rotate(0deg);
 }
 
-nav.toggled .sub-menu .dropdown-menu-toggle .gp-icon svg {
-    transform: rotate(0deg);
+.dropdown-click .sfHover > .dropdown-menu-toggle .gp-icon svg,
+nav.toggled .sfHover > .dropdown-menu-toggle .gp-icon svg,
+.generate-back-to-top .gp-icon svg {
+	transform: rotate(180deg);
 }
 
 /*--------------------------------------------------------------
@@ -2043,7 +2052,6 @@ button.dropdown-menu-toggle:hover,
 button.dropdown-menu-toggle:focus,
 button.dropdown-menu-toggle:active {
 	background: transparent;
-	color: inherit;
 }
 
 .toggled button.dropdown-menu-toggle {
@@ -2057,7 +2065,7 @@ button.dropdown-menu-toggle:active {
 	visibility: hidden;
 }
 
-.main-navigation.toggled .main-nav ul ul.toggled-on {
+.main-navigation.toggled ul ul.toggled-on {
 	position: relative;
 	top: 0;
 	left: auto !important;
@@ -2070,9 +2078,15 @@ button.dropdown-menu-toggle:active {
 	visibility: visible;
 }
 
-.main-navigation.toggled .main-nav li {
+.main-navigation.toggled li {
     width: 100%;
-    text-align: left;
+	text-align: left;
+}
+
+.main-navigation .menu-item-has-children {
+	display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .main-navigation.toggled .menu li.search-item {
