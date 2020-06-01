@@ -2206,14 +2206,14 @@ button.dropdown-menu-toggle:active {
 		order: initial;
 	}
 
-	.separate-containers #left-sidebar + #right-sidebar .inside-right-sidebar {
+	#left-sidebar + #right-sidebar .inside-right-sidebar {
 		margin-top: 0;
 	}
 
-	.both-right.separate-containers .inside-left-sidebar,
-	.both-left.separate-containers .inside-left-sidebar,
-	.both-right.separate-containers .inside-right-sidebar,
-	.both-left.separate-containers .inside-right-sidebar {
+	.both-right .inside-left-sidebar,
+	.both-left .inside-left-sidebar,
+	.both-right .inside-right-sidebar,
+	.both-left .inside-right-sidebar {
 		margin-right: 0;
 		margin-left: 0;
 	}
