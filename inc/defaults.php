@@ -149,6 +149,8 @@ if ( ! function_exists( 'generate_get_color_defaults' ) ) {
 		);
 
 		if ( ! generate_is_legacy() ) {
+			$defaults['header_text_color'] = '';
+			$defaults['header_link_color'] = '';
 			$defaults['navigation_background_color'] = '#ffffff';
 			$defaults['navigation_text_color'] = '#000000';
 			$defaults['navigation_background_hover_color'] = '';
