@@ -167,7 +167,7 @@ if ( ! function_exists( 'generate_body_classes' ) ) {
 			$classes[] = 'header-aligned-left';
 		}
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$footer_widgets = generate_get_footer_widgets();
 			$header_layout  = generate_get_option( 'header_layout_setting' );
 
@@ -255,7 +255,7 @@ if ( ! function_exists( 'generate_right_sidebar_classes' ) ) {
 		$classes[] = 'widget-area';
 		$classes[] = 'sidebar';
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
 			$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
 
@@ -298,7 +298,7 @@ if ( ! function_exists( 'generate_left_sidebar_classes' ) ) {
 		$classes[] = 'widget-area';
 		$classes[] = 'sidebar';
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
 			$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
 			$total_sidebar_width = $left_sidebar_width + $right_sidebar_width;
@@ -346,7 +346,7 @@ if ( ! function_exists( 'generate_content_classes' ) ) {
 	function generate_content_classes( $classes ) {
 		$classes[] = 'content-area';
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
 			$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
 			$total_sidebar_width = $left_sidebar_width + $right_sidebar_width;
@@ -476,7 +476,7 @@ if ( ! function_exists( 'generate_navigation_classes' ) ) {
 			}
 		}
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			if ( 'center' === generate_get_option( 'nav_alignment_setting' ) ) {
 				$classes[] = 'nav-align-center';
 			} elseif ( 'right' === generate_get_option( 'nav_alignment_setting' ) ) {

@@ -18,7 +18,7 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$dir_uri = get_template_directory_uri();
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			wp_enqueue_style( 'generate-style', $dir_uri . "/css/style{$suffix}.css", array(), GENERATE_VERSION, 'all' );
 		} else {
 			if ( generate_get_option( 'combine_css' ) && $suffix ) {

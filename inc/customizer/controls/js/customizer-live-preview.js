@@ -540,7 +540,7 @@ function generatepress_typography_live_update( id, selector, property, unit, med
 			var selector = 'body';
 			var prefix = 'nav-aligned-';
 
-			if ( generatepress_live_preview.isLite ) {
+			if ( ! generatepress_live_preview.isLegacy ) {
 				classes = ['left', 'center', 'right'];
 				selector = '.main-navigation:not(.slideout-navigation)';
 				prefix = 'nav-align-';

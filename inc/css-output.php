@@ -55,7 +55,7 @@ if ( ! function_exists( 'generate_base_css' ) ) {
 			);
 
 			$css->start_media_query( $media_query );
-				if ( generate_is_lite() ) { // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
+				if ( ! generate_is_legacy() ) { // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
 					$css->set_selector( '.inside-header' );
 					$css->add_property( '-ms-flex-direction', 'column' );
 					$css->add_property( 'flex-direction', 'column' );
@@ -112,7 +112,7 @@ if ( ! function_exists( 'generate_base_css' ) ) {
 			$css->add_property( 'width', absint( generate_get_option( 'logo_width' ) ), false, 'px' );
 		}
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
 			$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
 
@@ -227,7 +227,7 @@ if ( ! function_exists( 'generate_advanced_css' ) ) {
 		$css->add_property( 'color', $settings['subnavigation_text_current_color'] );
 		$css->add_property( 'background-color', $settings['subnavigation_background_current_color'] );
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$css->set_selector( '.inside-article, .comments-area, .page-header, .paging-navigation, .inside-page-header' );
 		} else {
 			$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .one-container .container, .separate-containers .paging-navigation, .inside-page-header' );
@@ -514,26 +514,27 @@ if ( ! function_exists( 'generate_font_css' ) ) {
 		$css->add_property( 'font-size', absint( $settings['footer_font_size'] ), $defaults['footer_font_size'], 'px' );
 
 		$css->start_media_query( generate_get_media_query( 'mobile' ) );
-			// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
-			if ( generate_is_lite() ) {
-				$mobile_site_title = $settings['mobile_site_title_font_size'];
-			} else {
-				$mobile_site_title = ( isset( $settings['mobile_site_title_font_size'] ) ) ? $settings['mobile_site_title_font_size'] : '30';
-			}
 
-			$css->set_selector( '.main-title' );
+		if ( ! generate_is_legacy() ) {
+			$mobile_site_title = $settings['mobile_site_title_font_size'];
+		} else {
+			$mobile_site_title = ( isset( $settings['mobile_site_title_font_size'] ) ) ? $settings['mobile_site_title_font_size'] : '30';
+		}
 
-			if ( ! empty( $mobile_site_title ) ) {
-				$css->add_property( 'font-size', absint( $mobile_site_title ), false, 'px' );
-			}
+		$css->set_selector( '.main-title' );
 
-			$mobile_h1 = ( isset( $settings['mobile_heading_1_font_size'] ) ) ? $settings['mobile_heading_1_font_size'] : '30';
-			$css->set_selector( 'h1' );
-			$css->add_property( 'font-size', absint( $mobile_h1 ), false, 'px' );
+		if ( ! empty( $mobile_site_title ) ) {
+			$css->add_property( 'font-size', absint( $mobile_site_title ), false, 'px' );
+		}
 
-			$mobile_h2 = ( isset( $settings['mobile_heading_2_font_size'] ) ) ? $settings['mobile_heading_2_font_size'] : '25';
-			$css->set_selector( 'h2' );
-			$css->add_property( 'font-size', absint( $mobile_h2 ), false, 'px' );
+		$mobile_h1 = ( isset( $settings['mobile_heading_1_font_size'] ) ) ? $settings['mobile_heading_1_font_size'] : '30';
+		$css->set_selector( 'h1' );
+		$css->add_property( 'font-size', absint( $mobile_h1 ), false, 'px' );
+
+		$mobile_h2 = ( isset( $settings['mobile_heading_2_font_size'] ) ) ? $settings['mobile_heading_2_font_size'] : '25';
+		$css->set_selector( 'h2' );
+		$css->add_property( 'font-size', absint( $mobile_h2 ), false, 'px' );
+
 		$css->stop_media_query();
 
 		do_action( 'generate_typography_css', $css );
@@ -565,7 +566,7 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 		$css->set_selector( '.inside-header' );
 		$css->add_property( 'padding', generate_padding_css( $settings['header_top'], $settings['header_right'], $settings['header_bottom'], $settings['header_left'] ), generate_padding_css( $defaults['header_top'], $defaults['header_right'], $defaults['header_bottom'], $defaults['header_left'] ) );
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$css->set_selector( '.inside-article, .comments-area, .page-header, .paging-navigation, .inside-page-header, .wp-block-group__inner-container' );
 		} else {
 			$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header, .wp-block-group__inner-container' );
@@ -584,7 +585,7 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 			$css->add_property( 'max-width', generate_get_option( 'container_width' ) + $content_padding, false, 'px' );
 		}
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$css->set_selector( '.one-container.right-sidebar .site-main,.one-container.both-right .site-main' );
 			$css->add_property( 'margin-right', absint( $settings['content_right'] ), absint( $defaults['content_right'] ), 'px' );
 
@@ -595,7 +596,7 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 			$css->add_property( 'margin', generate_padding_css( '0', $settings['content_right'], '0', $settings['content_left'] ), generate_padding_css( '0', $defaults['content_right'], '0', $defaults['content_left'] ) );
 		}
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$css->set_selector( '.widget, .site-main > *, .page-header, .widget-area .main-navigation' );
 			$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
 
@@ -691,50 +692,51 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 		$css->add_property( 'padding', generate_padding_css( $settings['footer_top'], $settings['footer_right'], $settings['footer_bottom'], $settings['footer_left'] ), generate_padding_css( $defaults['footer_top'], $defaults['footer_right'], $defaults['footer_bottom'], $defaults['footer_left'] ) );
 
 		$css->start_media_query( generate_get_media_query( 'mobile' ) );
-			if ( generate_is_lite() ) {
-				$css->set_selector( '.inside-article, .comments-area, .page-header, .paging-navigation, .inside-page-header, .wp-block-group__inner-container' );
+
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.inside-article, .comments-area, .page-header, .paging-navigation, .inside-page-header, .wp-block-group__inner-container' );
+		} else {
+			$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header, .wp-block-group__inner-container' );
+		}
+
+		$css->add_property( 'padding', generate_padding_css( $settings['mobile_content_top'], $settings['mobile_content_right'], $settings['mobile_content_bottom'], $settings['mobile_content_left'] ) );
+
+		$mobile_content_padding = absint( $settings['mobile_content_right'] ) + absint( $settings['mobile_content_left'] );
+		$css->set_selector( '.entry-content .alignwide, body:not(.no-sidebar) .entry-content .alignfull' );
+		$css->add_property( 'margin-left', '-' . absint( $settings['mobile_content_left'] ) . 'px' );
+		$css->add_property( 'width', 'calc(100% + ' . absint( $mobile_content_padding ) . 'px)' );
+		$css->add_property( 'max-width', 'calc(100% + ' . absint( $mobile_content_padding ) . 'px)' );
+
+		if ( '' !== $settings['mobile_separator'] ) {
+			if ( ! generate_is_legacy() ) {
+				$css->set_selector( '.widget, .site-main > *, .page-header' );
+				$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
+
+				$css->set_selector( '.site-main' );
+				$css->add_property( 'margin', absint( $settings['mobile_separator'] ), false, 'px' );
+
+				$css->set_selector( '.page-header-image, .page-header-image-single' );
+				$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+
+				$css->set_selector( '.inside-right-sidebar, .inside-left-sidebar' );
+				$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+				$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
 			} else {
-				$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header, .wp-block-group__inner-container' );
+				$css->set_selector( '.separate-containers .widget, .separate-containers .site-main > *, .separate-containers .page-header' );
+				$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
+
+				$css->set_selector( '.separate-containers .site-main' );
+				$css->add_property( 'margin', absint( $settings['mobile_separator'] ), false, 'px' );
+
+				$css->set_selector( '.separate-containers .page-header-image, .separate-containers .page-header-image-single' );
+				$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+
+				$css->set_selector( '.separate-containers .inside-right-sidebar, .separate-containers .inside-left-sidebar' );
+				$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
+				$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
 			}
+		}
 
-			$css->add_property( 'padding', generate_padding_css( $settings['mobile_content_top'], $settings['mobile_content_right'], $settings['mobile_content_bottom'], $settings['mobile_content_left'] ) );
-
-			$mobile_content_padding = absint( $settings['mobile_content_right'] ) + absint( $settings['mobile_content_left'] );
-			$css->set_selector( '.entry-content .alignwide, body:not(.no-sidebar) .entry-content .alignfull' );
-			$css->add_property( 'margin-left', '-' . absint( $settings['mobile_content_left'] ) . 'px' );
-			$css->add_property( 'width', 'calc(100% + ' . absint( $mobile_content_padding ) . 'px)' );
-			$css->add_property( 'max-width', 'calc(100% + ' . absint( $mobile_content_padding ) . 'px)' );
-
-			// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
-			if ( '' !== $settings['mobile_separator'] ) {
-				if ( generate_is_lite() ) {
-					$css->set_selector( '.widget, .site-main > *, .page-header' );
-					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
-
-					$css->set_selector( '.site-main' );
-					$css->add_property( 'margin', absint( $settings['mobile_separator'] ), false, 'px' );
-
-					$css->set_selector( '.page-header-image, .page-header-image-single' );
-					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
-
-					$css->set_selector( '.inside-right-sidebar, .inside-left-sidebar' );
-					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
-					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
-				} else {
-					$css->set_selector( '.separate-containers .widget, .separate-containers .site-main > *, .separate-containers .page-header' );
-					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
-
-					$css->set_selector( '.separate-containers .site-main' );
-					$css->add_property( 'margin', absint( $settings['mobile_separator'] ), false, 'px' );
-
-					$css->set_selector( '.separate-containers .page-header-image, .separate-containers .page-header-image-single' );
-					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
-
-					$css->set_selector( '.separate-containers .inside-right-sidebar, .separate-containers .inside-left-sidebar' );
-					$css->add_property( 'margin-top', absint( $settings['mobile_separator'] ), false, 'px' );
-					$css->add_property( 'margin-bottom', absint( $settings['mobile_separator'] ), false, 'px' );
-				}
-			} // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
 		$css->stop_media_query();
 
 		// Add spacing back where dropdown arrow should be.
@@ -746,7 +748,7 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 
 		$output = '';
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$generate_settings = wp_parse_args(
 				get_option( 'generate_settings', array() ),
 				generate_get_color_defaults()

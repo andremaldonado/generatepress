@@ -30,7 +30,7 @@ if ( ! function_exists( 'generate_construct_header' ) ) {
 				 */
 				do_action( 'generate_before_header_content' );
 
-				if ( ! generate_is_lite() ) {
+				if ( generate_is_legacy() ) {
 					// Add our main header items.
 					generate_header_items();
 				}
@@ -233,7 +233,7 @@ add_action( 'generate_before_header_content', 'generate_do_site_logo', 5 );
  * @since 3.0
  */
 function generate_do_site_logo() {
-	if ( ! generate_is_lite() ) {
+	if ( generate_is_legacy() ) {
 		return;
 	}
 
@@ -248,7 +248,7 @@ add_action( 'generate_before_header_content', 'generate_do_site_branding' );
  * @since 3.0
  */
 function generate_do_site_branding() {
-	if ( ! generate_is_lite() ) {
+	if ( generate_is_legacy() ) {
 		return;
 	}
 
@@ -263,7 +263,7 @@ add_action( 'generate_after_header_content', 'generate_do_header_widget' );
  * @since 3.0
  */
 function generate_do_header_widget() {
-	if ( ! generate_is_lite() ) {
+	if ( generate_is_legacy() ) {
 		return;
 	}
 

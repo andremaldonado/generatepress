@@ -353,10 +353,10 @@ function generate_get_media_query( $name ) {
 }
 
 /**
- * Define whether we're using GeneratePress Lite or not.
+ * Define whether we're using GeneratePress legacy or not.
  *
  * @since 3.0
  */
-function generate_is_lite() {
-	return get_option( 'generatepress_is_lite', false );
+function generate_is_legacy() {
+	return get_option( 'generatepress_is_legacy', false );
 }

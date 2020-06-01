@@ -206,7 +206,7 @@ if ( ! function_exists( 'generate_customize_register' ) ) {
 			)
 		);
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$wp_customize->add_setting(
 				'generate_settings[inline_logo_site_branding]',
 				array(
@@ -1045,7 +1045,7 @@ if ( ! function_exists( 'generate_customize_register' ) ) {
 			)
 		);
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$wp_customize->add_setting(
 				'generate_settings[content_layout_setting]',
 				array(
@@ -1431,7 +1431,7 @@ if ( ! function_exists( 'generate_customize_register' ) ) {
 			)
 		);
 
-		if ( ! generate_is_lite() ) {
+		if ( generate_is_legacy() ) {
 			$wp_customize->add_setting(
 				'generate_settings[combine_css]',
 				array(

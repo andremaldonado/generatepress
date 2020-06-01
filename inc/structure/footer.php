@@ -107,7 +107,7 @@ function generate_do_footer_widget( $widget_width, $widget ) {
 		absint( $widget )
 	);
 
-	if ( ! generate_is_lite() ) {
+	if ( generate_is_legacy() ) {
 		$widget_classes = sprintf(
 			'footer-widget-%1$s grid-parent grid-%2$s tablet-grid-%3$s mobile-grid-100',
 			absint( $widget ),

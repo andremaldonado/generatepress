@@ -60,7 +60,7 @@ if ( ! function_exists( 'generate_get_defaults' ) ) {
 			'dynamic_css_cache' => true,
 		);
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$defaults['container_width'] = '1300';
 			$defaults['hide_tagline'] = true;
 			$defaults['nav_position_setting'] = 'nav-float-right';
@@ -148,7 +148,7 @@ if ( ! function_exists( 'generate_get_color_defaults' ) ) {
 			'back_to_top_text_color_hover' => '#ffffff',
 		);
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$defaults['navigation_background_color'] = '#ffffff';
 			$defaults['navigation_text_color'] = '#000000';
 			$defaults['navigation_background_hover_color'] = '';
@@ -274,7 +274,7 @@ if ( ! function_exists( 'generate_get_default_fonts' ) ) {
 			'footer_font_size' => '15',
 		);
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$defaults['site_title_font_size'] = '30';
 			$defaults['mobile_site_title_font_size'] = '';
 		}
@@ -337,7 +337,7 @@ if ( ! function_exists( 'generate_spacing_get_defaults' ) ) {
 			'footer_left' => '20',
 		);
 
-		if ( generate_is_lite() ) {
+		if ( ! generate_is_legacy() ) {
 			$defaults['header_top'] = '20';
 			$defaults['header_right'] = '40';
 			$defaults['header_bottom'] = '40';
