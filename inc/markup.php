@@ -187,14 +187,20 @@ if ( ! function_exists( 'generate_body_classes' ) ) {
 			}
 		}
 
-		if ( 'click' === $navigation_dropdown ) {
-			$classes[] = 'dropdown-click';
-			$classes[] = 'dropdown-click-menu-item';
-		} elseif ( 'click-arrow' === $navigation_dropdown ) {
-			$classes[] = 'dropdown-click-arrow';
-			$classes[] = 'dropdown-click';
+		if ( ! generate_is_legacy() ) {
+			if ( 'click' === $navigation_dropdown ) {
+				$classes[] = 'dropdown-click';
+			}
 		} else {
-			$classes[] = 'dropdown-hover';
+			if ( 'click' === $navigation_dropdown ) {
+				$classes[] = 'dropdown-click';
+				$classes[] = 'dropdown-click-menu-item';
+			} elseif ( 'click-arrow' === $navigation_dropdown ) {
+				$classes[] = 'dropdown-click-arrow';
+				$classes[] = 'dropdown-click';
+			} else {
+				$classes[] = 'dropdown-hover';
+			}
 		}
 
 		if ( is_singular() ) {

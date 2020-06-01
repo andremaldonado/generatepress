@@ -981,21 +981,38 @@ if ( ! function_exists( 'generate_customize_register' ) ) {
 			)
 		);
 
-		$wp_customize->add_control(
-			'generate_settings[nav_dropdown_type]',
-			array(
-				'type' => 'select',
-				'label' => __( 'Navigation Dropdown', 'generatepress' ),
-				'section' => 'generate_layout_navigation',
-				'choices' => array(
-					'hover' => __( 'Hover', 'generatepress' ),
-					'click' => __( 'Click - Menu Item', 'generatepress' ),
-					'click-arrow' => __( 'Click - Arrow', 'generatepress' ),
-				),
-				'settings' => 'generate_settings[nav_dropdown_type]',
-				'priority' => 22,
-			)
-		);
+		if ( ! generate_is_legacy() ) {
+			$wp_customize->add_control(
+				'generate_settings[nav_dropdown_type]',
+				array(
+					'type' => 'select',
+					'label' => __( 'Navigation Dropdown', 'generatepress' ),
+					'section' => 'generate_layout_navigation',
+					'choices' => array(
+						'hover' => __( 'Hover', 'generatepress' ),
+						'click' => __( 'Click', 'generatepress' ),
+					),
+					'settings' => 'generate_settings[nav_dropdown_type]',
+					'priority' => 22,
+				)
+			);
+		} else {
+			$wp_customize->add_control(
+				'generate_settings[nav_dropdown_type]',
+				array(
+					'type' => 'select',
+					'label' => __( 'Navigation Dropdown', 'generatepress' ),
+					'section' => 'generate_layout_navigation',
+					'choices' => array(
+						'hover' => __( 'Hover', 'generatepress' ),
+						'click' => __( 'Click - Menu Item', 'generatepress' ),
+						'click-arrow' => __( 'Click - Arrow', 'generatepress' ),
+					),
+					'settings' => 'generate_settings[nav_dropdown_type]',
+					'priority' => 22,
+				)
+			);
+		}
 
 		$wp_customize->add_setting(
 			'generate_settings[nav_dropdown_direction]',
