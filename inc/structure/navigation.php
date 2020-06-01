@@ -281,19 +281,34 @@ if ( ! function_exists( 'generate_dropdown_icon_to_menu_link' ) ) {
 	 * @return string The menu item.
 	 */
 	function generate_dropdown_icon_to_menu_link( $title, $item, $args, $depth ) {
-		$role = 'presentation';
-		$tabindex = '';
+		if ( ! generate_is_legacy() ) {
+			if ( isset( $args->container_class ) && 'main-nav' === $args->container_class ) {
+				foreach ( $item->classes as $value ) {
+					if ( 'menu-item-has-children' === $value ) {
+						$arrow = sprintf(
+							'<span class="dropdown-menu-toggle">%1$s</span><button class="dropdown-menu-toggle">%1$s</button>',
+							generate_get_svg_icon( 'arrow' )
+						);
 
-		if ( 'click-arrow' === generate_get_option( 'nav_dropdown_type' ) ) {
-			$role = 'button';
-			$tabindex = ' tabindex="0"';
-		}
+						$title = $title . $arrow;
+					}
+				}
+			}
+		} else {
+			$role = 'presentation';
+			$tabindex = '';
 
-		if ( isset( $args->container_class ) && 'main-nav' === $args->container_class ) {
-			foreach ( $item->classes as $value ) {
-				if ( 'menu-item-has-children' === $value ) {
-					$icon = generate_get_svg_icon( 'arrow' );
-					$title = $title . '<span role="' . $role . '" class="dropdown-menu-toggle"' . $tabindex . '>' . $icon . '</span>';
+			if ( 'click-arrow' === generate_get_option( 'nav_dropdown_type' ) ) {
+				$role = 'button';
+				$tabindex = ' tabindex="0"';
+			}
+
+			if ( isset( $args->container_class ) && 'main-nav' === $args->container_class ) {
+				foreach ( $item->classes as $value ) {
+					if ( 'menu-item-has-children' === $value ) {
+						$icon = generate_get_svg_icon( 'arrow' );
+						$title = $title . '<span role="' . $role . '" class="dropdown-menu-toggle"' . $tabindex . '>' . $icon . '</span>';
+					}
 				}
 			}
 		}

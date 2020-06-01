@@ -758,28 +758,17 @@ li.search-item.active {
 	top: 0
 }
 
-.main-navigation .main-nav ul li.menu-item-has-children > a {
+nav .main-nav ul li.menu-item-has-children > a {
 	padding-right: 0;
 	position: relative;
+	display: flex;
+	justify-content: space-between;
 }
 
-.menu-item-has-children .dropdown-menu-toggle {
+.dropdown-menu-toggle {
 	display: inline-block;
-	height: 100%;
-	clear: both;
 	padding-right: 20px;
 	padding-left: 10px;
-}
-
-.menu-item-has-children ul .dropdown-menu-toggle {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-top: -10px;
-}
-
-nav ul ul .menu-item-has-children .dropdown-menu-toggle,
-.sidebar .menu-item-has-children .dropdown-menu-toggle {
-	float: right;
 }
 
 .dropdown-click .main-navigation ul ul ul.toggled-on {
@@ -2085,8 +2074,29 @@ nav.toggled ul ul.sub-menu {
 	transition-delay: 0s;
 }
 
-.toggled .menu-item-has-children .dropdown-menu-toggle {
-	padding-left: 20px;
+.toggled span.dropdown-menu-toggle {
+	display: none;
+}
+
+button.dropdown-menu-toggle {
+    background: transparent;
+	color: inherit;
+	display: none;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+button.dropdown-menu-toggle:hover,
+button.dropdown-menu-toggle:focus,
+button.dropdown-menu-toggle:active {
+	background: transparent;
+	color: inherit;
+}
+
+.toggled button.dropdown-menu-toggle {
+    display: block;
+    height: auto;
+    align-self: stretch;
 }
 
 .main-navigation.toggled ul ul {
@@ -2110,10 +2120,6 @@ nav.toggled ul ul.sub-menu {
 .main-navigation.toggled .main-nav li {
     width: 100%;
     text-align: left;
-}
-
-.main-navigation.toggled .menu-item-has-children .dropdown-menu-toggle {
-	float: right;
 }
 
 .main-navigation.toggled .menu li.search-item {
