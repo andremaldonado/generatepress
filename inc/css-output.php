@@ -157,7 +157,12 @@ if ( ! function_exists( 'generate_advanced_css' ) ) {
 		$css->add_property( 'background-color', $settings['header_background_color'] );
 		$css->add_property( 'color', $settings['header_text_color'] );
 
-		$css->set_selector( '.site-header a,.site-header a:visited' );
+		if ( ! generate_is_legacy() ) {
+			$css->set_selector( '.site-header a' );
+		} else {
+			$css->set_selector( '.site-header a,.site-header a:visited' );
+		}
+
 		$css->add_property( 'color', $settings['header_link_color'] );
 
 		$css->set_selector( '.site-header a:hover' );
