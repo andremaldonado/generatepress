@@ -1822,22 +1822,10 @@ div.top-bar .widget {
 # Footer
 --------------------------------------------------------------*/
 
-.footer-widgets {
-	padding: 40px;
-}
-
 .site-info {
 	text-align: center;
 	padding: 20px;
 	font-size: 15px;
-}
-
-.site-footer .footer-widgets-container .inner-padding {
-	padding: 0px 0px 0px 40px;
-}
-
-.site-footer .footer-widgets-container .inside-footer-widgets {
-	margin-left: -40px;
 }
 
 /*--------------------------------------------------------------
