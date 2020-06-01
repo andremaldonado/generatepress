@@ -20,6 +20,10 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 
 		if ( ! generate_is_legacy() ) {
 			wp_enqueue_style( 'generate-style', $dir_uri . "/css/style{$suffix}.css", array(), GENERATE_VERSION, 'all' );
+
+			if ( 'font' === generate_get_option( 'icons' ) ) {
+				wp_enqueue_style( 'generate-font-icons', $dir_uri . "/css/font-icons{$suffix}.css", array(), GENERATE_VERSION, 'all' );
+			}
 		} else {
 			if ( generate_get_option( 'combine_css' ) && $suffix ) {
 				wp_enqueue_style( 'generate-style', $dir_uri . '/css/all.min.css', array(), GENERATE_VERSION, 'all' );
