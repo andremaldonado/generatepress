@@ -1777,15 +1777,6 @@ div.top-bar .widget {
 	display: none;
 }
 
-.inside-site-info {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-}
-
 .footer-bar-align-right .copyright-bar {
 	-webkit-box-ordinal-group: -19;
 	-ms-flex-order: -20;
@@ -1835,6 +1826,15 @@ div.top-bar .widget {
 	text-align: center;
 	padding: 20px;
 	font-size: 15px;
+}
+
+.inside-site-info {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
 }
 
 /*--------------------------------------------------------------
