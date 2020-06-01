@@ -1233,7 +1233,7 @@ ol.comment-list {
 --------------------------------------------------------------*/
 
 .widget-area .widget {
-    padding: 40px;
+    padding: 50px;
 }
 
 .widget {
@@ -1341,14 +1341,14 @@ ol.comment-list {
 .paging-navigation,
 .inside-page-header,
 .wp-block-group__inner-container {
-	padding: 40px;
+	padding: 50px;
 }
 
 .widget,
 .site-main > *,
 .page-header,
 .widget-area .main-navigation {
-	margin-bottom: 40px;
+	margin-bottom: 50px;
 }
 
 .site-main {
@@ -1607,25 +1607,26 @@ ol.comment-list {
 
 .inside-footer-widgets > div {
 	-ms-flex: 1 1 0px;
+	flex: 1 1 0;
 }
 
 .footer-widgets {
-    padding: 40px;
+    padding: 50px;
 }
 
 .site-footer .footer-widgets-container .inner-padding {
-    padding: 0px 0px 0px 40px;
+    padding: 0px 0px 0px 50px;
 }
 
 .site-footer .footer-widgets-container .inside-footer-widgets {
-    margin-left: -40px;
+    margin-left: -50px;
 }
 
 @supports( grid-area: auto ) {
 	.inside-footer-widgets {
 		display: -ms-grid;
 		display: grid;
-		grid-gap: 40px;
+		grid-gap: 50px;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	}
 

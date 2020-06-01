@@ -344,6 +344,18 @@ if ( ! function_exists( 'generate_spacing_get_defaults' ) ) {
 			$defaults['header_left'] = '40';
 			$defaults['separator'] = '40';
 			$defaults['mobile_separator'] = '20';
+			$defaults['content_top'] = '50';
+			$defaults['content_right'] = '50';
+			$defaults['content_bottom'] = '50';
+			$defaults['content_left'] = '50';
+			$defaults['widget_top'] = '50';
+			$defaults['widget_right'] = '50';
+			$defaults['widget_bottom'] = '50';
+			$defaults['widget_left'] = '50';
+			$defaults['footer_widget_container_top'] = '50';
+			$defaults['footer_widget_container_right'] = '50';
+			$defaults['footer_widget_container_bottom'] = '50';
+			$defaults['footer_widget_container_left'] = '50';
 		}
 
 		if ( $filter ) {
