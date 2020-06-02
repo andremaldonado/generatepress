@@ -487,6 +487,10 @@ if ( ! function_exists( 'generate_navigation_classes' ) ) {
 			if ( 'click' === generate_get_option( 'nav_dropdown_type' ) ) {
 				$classes[] = 'dropdown-click';
 			}
+
+			if ( 'nav-right-sidebar' === generate_get_navigation_location() && 'click' !== generate_get_option( 'nav_dropdown_type' ) ) {
+				$classes[] = 'sub-menu-left';
+			}
 		}
 
 		return $classes;
