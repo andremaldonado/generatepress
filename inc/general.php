@@ -31,6 +31,10 @@ function generate_enqueue_scripts() {
 		wp_enqueue_style( 'generate-font-icons', $dir_uri . "/assets/css/font-icons{$suffix}.css", array(), GENERATE_VERSION, 'all' );
 	}
 
+	if ( is_singular() && comments_open() ) {
+		wp_enqueue_style( 'generate-comments', $dir_uri . "/assets/css/comments{$suffix}.css", array(), GENERATE_VERSION, 'all' );
+	}
+
 	if ( function_exists( 'wp_script_add_data' ) ) {
 		wp_enqueue_script( 'generate-classlist', $dir_uri . "/js/classList{$suffix}.js", array(), GENERATE_VERSION, true );
 		wp_script_add_data( 'generate-classlist', 'conditional', 'lte IE 11' );
