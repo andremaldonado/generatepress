@@ -1463,12 +1463,12 @@ ol.comment-list {
 
 .both-right .inside-left-sidebar,
 .both-left .inside-left-sidebar {
-	margin-right: 10px;
+	margin-right: 20px;
 }
 
 .both-right .inside-right-sidebar,
 .both-left .inside-right-sidebar {
-	margin-left: 10px;
+	margin-left: 20px;
 }
 
 .inside-right-sidebar,
