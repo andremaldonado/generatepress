@@ -877,6 +877,99 @@ nav ul li.menu-item-has-children > a {
 	vertical-align: middle;
 }
 
+.inside-header {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.header-widget {
+	margin-left: auto;
+}
+
+.nav-float-right .header-widget {
+	margin-left: 20px;
+}
+
+.nav-float-right #site-navigation {
+	margin-left: auto;
+}
+
+.nav-float-left #site-navigation {
+	margin-right: auto;
+}
+
+.nav-float-left .site-logo {
+	-webkit-box-ordinal-group: 11;
+	-ms-flex-order: 10;
+	order: 10;
+}
+
+.nav-float-left .site-branding {
+	-webkit-box-ordinal-group: 6;
+	-ms-flex-order: 5;
+	order: 5;
+}
+
+.nav-float-left .header-widget {
+	margin-left: 0;
+	margin-right: 20px;
+	-webkit-box-ordinal-group: -10;
+	-ms-flex-order: -10;
+	order: -10;
+}
+
+.header-widget p:last-child {
+	margin-bottom: 0;
+}
+
+.header-aligned-center:not([class*="nav-float-"]) .inside-header {
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+.header-aligned-center:not([class*="nav-float-"]) .header-widget {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.header-aligned-center:not([class*="nav-float-"]) .inside-header > *:not(:first-child) {
+	margin-top: 1em;
+}
+
+.header-aligned-right:not([class*="nav-float-"]) .inside-header {
+	-webkit-box-pack: end;
+	-ms-flex-pack: end;
+	justify-content: flex-end;
+}
+
+.header-aligned-right:not([class*="nav-float-"]) .header-widget {
+	margin-right: auto;
+	margin-left: 0;
+	-webkit-box-ordinal-group: -9;
+	-ms-flex-order: -10;
+	order: -10;
+}
+
+.header-aligned-right .site-logo {
+	-webkit-box-ordinal-group: 3;
+	-ms-flex-order: 2;
+	order: 2;
+}
+
+.site-logo + .site-branding {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
@@ -1456,103 +1549,6 @@ ol.comment-list {
     -webkit-box-ordinal-group: 11;
     -ms-flex-order: 10;
     order: 10;
-}
-
-/*--------------------------------------------------------------
-## Header
---------------------------------------------------------------*/
-
-.inside-header {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-}
-
-.header-widget {
-	margin-left: auto;
-}
-
-.nav-float-right .header-widget {
-	margin-left: 20px;
-}
-
-.nav-float-right #site-navigation {
-	margin-left: auto;
-}
-
-.nav-float-left #site-navigation {
-	margin-right: auto;
-}
-
-.nav-float-left .site-logo {
-	-webkit-box-ordinal-group: 11;
-	-ms-flex-order: 10;
-	order: 10;
-}
-
-.nav-float-left .site-branding {
-	-webkit-box-ordinal-group: 6;
-	-ms-flex-order: 5;
-	order: 5;
-}
-
-.nav-float-left .header-widget {
-	margin-left: 0;
-	margin-right: 20px;
-	-webkit-box-ordinal-group: -10;
-	-ms-flex-order: -10;
-	order: -10;
-}
-
-.header-widget p:last-child {
-	margin-bottom: 0;
-}
-
-.header-aligned-center:not([class*="nav-float-"]) .inside-header {
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
-	flex-direction: column;
-}
-
-.header-aligned-center:not([class*="nav-float-"]) .header-widget {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.header-aligned-center:not([class*="nav-float-"]) .inside-header > *:not(:first-child) {
-	margin-top: 1em;
-}
-
-.header-aligned-right:not([class*="nav-float-"]) .inside-header {
-	-webkit-box-pack: end;
-	-ms-flex-pack: end;
-	justify-content: flex-end;
-}
-
-.header-aligned-right:not([class*="nav-float-"]) .header-widget {
-	margin-right: auto;
-	margin-left: 0;
-	-webkit-box-ordinal-group: -9;
-	-ms-flex-order: -10;
-	order: -10;
-}
-
-.header-aligned-right .site-logo {
-	-webkit-box-ordinal-group: 3;
-	-ms-flex-order: 2;
-	order: 2;
-}
-
-.site-logo + .site-branding {
-	margin-left: 20px;
-	margin-right: 20px;
 }
 
 /*--------------------------------------------------------------
