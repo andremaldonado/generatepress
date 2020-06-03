@@ -642,7 +642,7 @@ if ( ! function_exists( 'generate_spacing_css' ) ) {
 		}
 
 		if ( ! generate_is_legacy() ) {
-			$css->set_selector( '.widget, .site-main > *, .page-header, .widget-area .main-navigation' );
+			$css->set_selector( '.sidebar .widget, .site-main > *, .page-header, .widget-area .main-navigation' );
 			$css->add_property( 'margin-bottom', absint( $settings['separator'] ), absint( $defaults['separator'] ), 'px' );
 
 			$css->set_selector( '.site-main' );

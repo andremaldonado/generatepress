@@ -906,7 +906,7 @@ li.search-item.active {
 	padding: 50px;
 }
 
-.widget,
+.widget-area .widget,
 .site-main > *,
 .page-header,
 .widget-area .main-navigation {
