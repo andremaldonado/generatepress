@@ -1,0 +1,53 @@
+.main-navigation .main-nav > ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.sidebar .main-navigation .main-nav > ul {
+	flex-direction: column;
+}
+
+.nav-align-center .main-nav > ul {
+	justify-content: center;
+}
+
+.nav-align-right .main-nav > ul {
+	justify-content: flex-end;
+}
+
+.nav-align-center .main-nav > ul > li.close-search {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.main-navigation:not([class*="nav-align-"]) .menu-item-align-right {
+	margin-left: auto;
+}
+
+.main-navigation:not([class*="nav-align-"]) .menu-item-align-right + .menu-item-align-right {
+	margin-left: 0;
+}
+
+.main-navigation a {
+	display: block;
+	text-decoration: none;
+	font-weight: normal;
+	text-transform: none;
+    font-size: 15px;
+}
+
+.main-navigation ul {
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+.main-navigation li {
+    position: relative;
+}
+
+.main-navigation li a {
+    padding-left: 20px;
+	padding-right: 20px;
+	line-height: 60px;
+}

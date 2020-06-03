@@ -1,0 +1,53 @@
+.gp-icon {
+	display: inline-flex;
+	align-self: center;
+}
+
+.gp-icon svg {
+	height: 1em;
+	width: 1em;
+	top: .125em;
+	position: relative;
+	fill: currentColor;
+}
+
+.icon-menu-bars svg:nth-child(2),
+.toggled .icon-menu-bars svg:nth-child(1),
+.icon-search svg:nth-child(2),
+.close-search .icon-search svg:nth-child(1) {
+	display: none;
+}
+
+.toggled .icon-menu-bars svg:nth-child(2),
+.close-search .icon-search svg:nth-child(2) {
+	display: block;
+}
+
+.entry-meta .gp-icon {
+	margin-right: 0.6em;
+	opacity: 0.7;
+}
+
+nav ul ul .dropdown-menu-toggle .gp-icon svg,
+.inside-left-sidebar .dropdown-menu-toggle .gp-icon svg,
+.nav-next .gp-icon svg {
+	transform: rotate(-90deg);
+	transform-origin: center;
+}
+
+.sub-menu-left:not(.toggled) ul ul .dropdown-menu-toggle .gp-icon svg,
+.inside-right-sidebar .dropdown-menu-toggle .gp-icon svg,
+.nav-previous .gp-icon svg {
+	transform: rotate(90deg);
+}
+
+nav.toggled .sub-menu .dropdown-menu-toggle .gp-icon svg,
+.dropdown-click .dropdown-menu-toggle .gp-icon svg {
+    transform: rotate(0deg);
+}
+
+.dropdown-click .sfHover > .dropdown-menu-toggle .gp-icon svg,
+nav.toggled .sfHover > .dropdown-menu-toggle .gp-icon svg,
+.generate-back-to-top .gp-icon svg {
+	transform: rotate(180deg);
+}
