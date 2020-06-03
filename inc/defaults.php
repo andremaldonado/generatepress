@@ -18,7 +18,7 @@ if ( ! function_exists( 'generate_get_defaults' ) ) {
 	function generate_get_defaults() {
 		$defaults = array(
 			'hide_title' => '',
-			'hide_tagline' => '',
+			'hide_tagline' => true,
 			'logo' => '',
 			'inline_logo_site_branding' => false,
 			'retina_logo' => '',
@@ -26,7 +26,7 @@ if ( ! function_exists( 'generate_get_defaults' ) ) {
 			'top_bar_width' => 'full',
 			'top_bar_inner_width' => 'contained',
 			'top_bar_alignment' => 'right',
-			'container_width' => '1100',
+			'container_width' => '1300',
 			'container_alignment' => 'boxes',
 			'header_layout_setting' => 'fluid-header',
 			'header_inner_width' => 'contained',
@@ -34,7 +34,7 @@ if ( ! function_exists( 'generate_get_defaults' ) ) {
 			'header_alignment_setting' => ( is_rtl() ) ? 'right' : 'left',
 			'nav_layout_setting' => 'fluid-nav',
 			'nav_inner_width' => 'contained',
-			'nav_position_setting' => 'nav-below-header',
+			'nav_position_setting' => 'nav-float-right',
 			'nav_drop_point' => '',
 			'nav_dropdown_type' => 'hover',
 			'nav_dropdown_direction' => 'right',
@@ -49,23 +49,23 @@ if ( ! function_exists( 'generate_get_defaults' ) ) {
 			'footer_widget_setting' => '3',
 			'footer_bar_alignment' => 'right',
 			'back_to_top' => '',
-			'background_color' => '#efefef',
+			'background_color' => '#f7f7f7',
 			'text_color' => '#3a3a3a',
 			'link_color' => '#1e73be',
 			'link_color_hover' => '#000000',
 			'link_color_visited' => '',
 			'font_awesome_essentials' => true,
-			'icons' => 'font',
+			'icons' => 'svg',
 			'combine_css' => true,
 			'dynamic_css_cache' => true,
 		);
 
-		if ( ! generate_is_legacy() ) {
-			$defaults['container_width'] = '1300';
-			$defaults['hide_tagline'] = true;
-			$defaults['nav_position_setting'] = 'nav-float-right';
-			$defaults['background_color'] = '#f7f7f7';
-			$defaults['icons'] = 'svg';
+		if ( generate_is_legacy() ) {
+			$defaults['container_width'] = '1100';
+			$defaults['hide_tagline'] = '';
+			$defaults['nav_position_setting'] = 'nav-below-header';
+			$defaults['background_color'] = '#efefef';
+			$defaults['icons'] = 'font';
 		}
 
 		return apply_filters( 'generate_option_defaults', $defaults );
@@ -83,17 +83,17 @@ if ( ! function_exists( 'generate_get_color_defaults' ) ) {
 			'top_bar_link_color' => '#ffffff',
 			'top_bar_link_color_hover' => '#303030',
 			'header_background_color' => '#ffffff',
-			'header_text_color' => '#3a3a3a',
-			'header_link_color' => '#3a3a3a',
+			'header_text_color' => '',
+			'header_link_color' => '',
 			'header_link_hover_color' => '',
 			'site_title_color' => '#222222',
 			'site_tagline_color' => '#757575',
-			'navigation_background_color' => '#222222',
-			'navigation_text_color' => '#ffffff',
-			'navigation_background_hover_color' => '#3f3f3f',
-			'navigation_text_hover_color' => '#ffffff',
-			'navigation_background_current_color' => '#3f3f3f',
-			'navigation_text_current_color' => '#ffffff',
+			'navigation_background_color' => '#ffffff',
+			'navigation_text_color' => '#000000',
+			'navigation_background_hover_color' => '',
+			'navigation_text_hover_color' => '#1e73be',
+			'navigation_background_current_color' => '',
+			'navigation_text_current_color' => '#1e73be',
 			'subnavigation_background_color' => '#3f3f3f',
 			'subnavigation_text_color' => '#ffffff',
 			'subnavigation_background_hover_color' => '#4f4f4f',
@@ -148,15 +148,15 @@ if ( ! function_exists( 'generate_get_color_defaults' ) ) {
 			'back_to_top_text_color_hover' => '#ffffff',
 		);
 
-		if ( ! generate_is_legacy() ) {
-			$defaults['header_text_color'] = '';
-			$defaults['header_link_color'] = '';
-			$defaults['navigation_background_color'] = '#ffffff';
-			$defaults['navigation_text_color'] = '#000000';
-			$defaults['navigation_background_hover_color'] = '';
-			$defaults['navigation_text_hover_color'] = '#1e73be';
-			$defaults['navigation_background_current_color'] = '';
-			$defaults['navigation_text_current_color'] = '#1e73be';
+		if ( generate_is_legacy() ) {
+			$defaults['header_text_color'] = '#3a3a3a';
+			$defaults['header_link_color'] = '#3a3a3a';
+			$defaults['navigation_background_color'] = '#222222';
+			$defaults['navigation_text_color'] = '#ffffff';
+			$defaults['navigation_background_hover_color'] = '#3f3f3f';
+			$defaults['navigation_text_hover_color'] = '#ffffff';
+			$defaults['navigation_background_current_color'] = '#3f3f3f';
+			$defaults['navigation_text_current_color'] = '#ffffff';
 		}
 
 		return apply_filters( 'generate_color_option_defaults', $defaults );
@@ -193,8 +193,8 @@ if ( ! function_exists( 'generate_get_default_fonts' ) ) {
 			'font_site_title_variants' => '',
 			'site_title_font_weight' => 'bold',
 			'site_title_font_transform' => 'none',
-			'site_title_font_size' => '45',
-			'mobile_site_title_font_size' => '30',
+			'site_title_font_size' => '30',
+			'mobile_site_title_font_size' => '',
 			'font_site_tagline' => 'inherit',
 			'font_site_tagline_category' => '',
 			'font_site_tagline_variants' => '',
@@ -276,9 +276,9 @@ if ( ! function_exists( 'generate_get_default_fonts' ) ) {
 			'footer_font_size' => '15',
 		);
 
-		if ( ! generate_is_legacy() ) {
-			$defaults['site_title_font_size'] = '30';
-			$defaults['mobile_site_title_font_size'] = '';
+		if ( generate_is_legacy() ) {
+			$defaults['site_title_font_size'] = '45';
+			$defaults['mobile_site_title_font_size'] = '30';
 		}
 
 		if ( $filter ) {
@@ -304,60 +304,60 @@ if ( ! function_exists( 'generate_spacing_get_defaults' ) ) {
 			'top_bar_right' => '10',
 			'top_bar_bottom' => '10',
 			'top_bar_left' => '10',
-			'header_top' => '40',
-			'header_right' => '40',
-			'header_bottom' => '40',
-			'header_left' => '40',
+			'header_top' => '20',
+			'header_right' => '20',
+			'header_bottom' => '20',
+			'header_left' => '20',
 			'menu_item' => '20',
 			'menu_item_height' => '60',
 			'sub_menu_item_height' => '10',
 			'sub_menu_width' => '200',
-			'content_top' => '40',
-			'content_right' => '40',
-			'content_bottom' => '40',
-			'content_left' => '40',
+			'content_top' => '50',
+			'content_right' => '50',
+			'content_bottom' => '50',
+			'content_left' => '50',
 			'mobile_content_top' => '30',
 			'mobile_content_right' => '30',
 			'mobile_content_bottom' => '30',
 			'mobile_content_left' => '30',
-			'separator' => '20',
-			'mobile_separator' => '',
+			'separator' => '40',
+			'mobile_separator' => '20',
 			'left_sidebar_width' => '25',
 			'right_sidebar_width' => '25',
-			'widget_top' => '40',
-			'widget_right' => '40',
-			'widget_bottom' => '40',
-			'widget_left' => '40',
-			'footer_widget_container_top' => '40',
-			'footer_widget_container_right' => '40',
-			'footer_widget_container_bottom' => '40',
-			'footer_widget_container_left' => '40',
-			'footer_widget_separator' => '40',
+			'widget_top' => '50',
+			'widget_right' => '50',
+			'widget_bottom' => '50',
+			'widget_left' => '50',
+			'footer_widget_container_top' => '50',
+			'footer_widget_container_right' => '50',
+			'footer_widget_container_bottom' => '50',
+			'footer_widget_container_left' => '50',
+			'footer_widget_separator' => '50',
 			'footer_top' => '20',
 			'footer_right' => '20',
 			'footer_bottom' => '20',
 			'footer_left' => '20',
 		);
 
-		if ( ! generate_is_legacy() ) {
-			$defaults['header_top'] = '20';
+		if ( generate_is_legacy() ) {
+			$defaults['header_top'] = '40';
 			$defaults['header_right'] = '40';
 			$defaults['header_bottom'] = '40';
 			$defaults['header_left'] = '40';
-			$defaults['separator'] = '40';
-			$defaults['mobile_separator'] = '20';
-			$defaults['content_top'] = '50';
-			$defaults['content_right'] = '50';
-			$defaults['content_bottom'] = '50';
-			$defaults['content_left'] = '50';
-			$defaults['widget_top'] = '50';
-			$defaults['widget_right'] = '50';
-			$defaults['widget_bottom'] = '50';
-			$defaults['widget_left'] = '50';
-			$defaults['footer_widget_container_top'] = '50';
-			$defaults['footer_widget_container_right'] = '50';
-			$defaults['footer_widget_container_bottom'] = '50';
-			$defaults['footer_widget_container_left'] = '50';
+			$defaults['separator'] = '20';
+			$defaults['mobile_separator'] = '';
+			$defaults['content_top'] = '40';
+			$defaults['content_right'] = '40';
+			$defaults['content_bottom'] = '40';
+			$defaults['content_left'] = '40';
+			$defaults['widget_top'] = '40';
+			$defaults['widget_right'] = '40';
+			$defaults['widget_bottom'] = '40';
+			$defaults['widget_left'] = '40';
+			$defaults['footer_widget_container_top'] = '40';
+			$defaults['footer_widget_container_right'] = '40';
+			$defaults['footer_widget_container_bottom'] = '40';
+			$defaults['footer_widget_container_left'] = '40';
 		}
 
 		if ( $filter ) {
