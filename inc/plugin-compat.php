@@ -241,6 +241,10 @@ if ( ! function_exists( 'generate_beaver_builder_css' ) ) {
 	 * @since 1.3.45
 	 */
 	function generate_beaver_builder_css() {
+		if ( ! generate_is_legacy() ) {
+			return; // Bail if we're not using legacy mode.
+		}
+
 		// Check is Beaver Builder is active
 		// If we have the full-width-content class, we don't need to do anything else.
 		if ( in_array( 'fl-builder', get_body_class() ) && ! in_array( 'full-width-content', get_body_class() ) && ! in_array( 'contained-content', get_body_class() ) ) {
