@@ -107,7 +107,7 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 		}
 
 		if ( ! apply_filters( 'generate_fontawesome_essentials', false ) ) {
-			wp_enqueue_style( 'font-awesome', $dir_uri . "/css/font-awesome{$suffix}.css", false, '4.7', 'all' );
+			wp_enqueue_style( 'font-awesome', $dir_uri . "/assets/v1/css/font-awesome{$suffix}.css", false, '4.7', 'all' );
 		}
 
 		if ( function_exists( 'wp_script_add_data' ) ) {
