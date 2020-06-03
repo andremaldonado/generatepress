@@ -287,6 +287,28 @@ if ( ! function_exists( 'generate_right_sidebar_classes' ) ) {
 	}
 }
 
+add_filter( 'generate_page_class', 'generate_set_page_classes' );
+/**
+ * Set classes for our #page element.
+ *
+ * @since x.x.x
+ * @param array $classes The existing classes.
+ */
+function generate_set_page_classes( $classes ) {
+	if ( ! generate_is_legacy() ) {
+		$classes[] = 'site';
+		$classes[] = 'grid-container';
+	} else {
+		$classes[] = 'site';
+		$classes[] = 'grid-container';
+		$classes[] = 'hfeed';
+		$classes[] = 'container';
+		$classes[] = 'grid-parent';
+	}
+
+	return $classes;
+}
+
 if ( ! function_exists( 'generate_left_sidebar_classes' ) ) {
 	add_filter( 'generate_left_sidebar_class', 'generate_left_sidebar_classes' );
 	/**
