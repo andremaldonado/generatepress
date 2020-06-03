@@ -291,6 +291,22 @@ if ( ! function_exists( 'generate_settings_page' ) ) {
 										?>
 									</div>
 								</div>
+
+								<div class="postbox generate-metabox" id="legacy-mode">
+									<h3 class="hndle"><?php esc_html_e( 'Legacy Mode', 'generatepress' ); ?></h3>
+									<div class="inside">
+										<p><?php esc_html_e( 'Highly experimental.', 'generatepress' ); ?></p>
+										<form method="post">
+											<?php wp_nonce_field( 'generate_legacy_mode_nonce', 'generate_legacy_mode_nonce' ); ?>
+											<p>
+												<input type="checkbox" name="generate_use_legacy_mode" id="generate_use_legacy_mode" value="1" <?php checked( get_option( 'generatepress_is_legacy' ), 1 ); ?> />
+												<label for="generate_use_legacy_mode"><?php esc_html_e( 'Use legacy mode', 'generatepress' ); ?></label>
+											</p>
+
+											<input type="submit" class="button button-primary" value="<?php esc_html_e( 'Save', 'generatepress' ); ?>" />
+										</form>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -343,6 +359,38 @@ if ( ! function_exists( 'generate_reset_customizer_settings' ) ) {
 		wp_safe_redirect( admin_url( 'themes.php?page=generate-options&status=reset' ) );
 		exit;
 	}
+}
+
+add_action( 'admin_init', 'generate_set_legacy_mode_option' );
+/**
+ * Reset customizer settings
+ *
+ * @since 0.1
+ */
+function generate_set_legacy_mode_option() {
+	if ( ! isset( $_POST['generate_legacy_mode_nonce'] ) ) {
+		return;
+	}
+
+	if ( ! wp_verify_nonce( sanitize_key( $_POST['generate_legacy_mode_nonce'] ), 'generate_legacy_mode_nonce' ) ) {
+		wp_die( __( 'Not authorized', 'generatepress' ) );
+	}
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	if ( ! empty( $_POST['generate_use_legacy_mode'] ) ) {
+		update_option( 'generatepress_is_legacy', true );
+	} else {
+		delete_option( 'generatepress_is_legacy' );
+	}
+
+	delete_option( 'generate_dynamic_css_output' );
+	delete_option( 'generate_dynamic_css_cached_version' );
+
+	wp_safe_redirect( admin_url( 'themes.php?page=generate-options&settings-updated=true' ) );
+	exit;
 }
 
 if ( ! function_exists( 'generate_admin_errors' ) ) {
