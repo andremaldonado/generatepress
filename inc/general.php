@@ -90,16 +90,16 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 		$dir_uri = get_template_directory_uri();
 
 		if ( generate_get_option( 'combine_css' ) && $suffix ) {
-			wp_enqueue_style( 'generate-style', $dir_uri . '/css/all.min.css', array(), GENERATE_VERSION, 'all' );
+			wp_enqueue_style( 'generate-style', $dir_uri . '/assets/v1/css/all.min.css', array(), GENERATE_VERSION, 'all' );
 		} else {
 			$lite = '';
 			if ( apply_filters( 'generate_unsemantic_grid_lite', false ) ) {
 				$lite = '-lite';
 			}
 
-			wp_enqueue_style( 'generate-style-grid', $dir_uri . "/css/unsemantic-grid{$lite}{$suffix}.css", false, GENERATE_VERSION, 'all' );
-			wp_enqueue_style( 'generate-style', $dir_uri . "/style{$suffix}.css", array(), GENERATE_VERSION, 'all' );
-			wp_enqueue_style( 'generate-mobile-style', $dir_uri . "/css/mobile{$suffix}.css", array( 'generate-style' ), GENERATE_VERSION, 'all' );
+			wp_enqueue_style( 'generate-style-grid', $dir_uri . "/assets/v1/css/unsemantic-grid{$lite}{$suffix}.css", false, GENERATE_VERSION, 'all' );
+			wp_enqueue_style( 'generate-style', $dir_uri . "/assets/v1/style{$suffix}.css", array(), GENERATE_VERSION, 'all' );
+			wp_enqueue_style( 'generate-mobile-style', $dir_uri . "/assets/v1/css/mobile{$suffix}.css", array( 'generate-style' ), GENERATE_VERSION, 'all' );
 		}
 
 		if ( is_child_theme() ) {
@@ -115,11 +115,11 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 			wp_script_add_data( 'generate-classlist', 'conditional', 'lte IE 11' );
 		}
 
-		wp_enqueue_script( 'generate-menu', $dir_uri . "/js/menu{$suffix}.js", array(), GENERATE_VERSION, true );
-		wp_enqueue_script( 'generate-a11y', $dir_uri . "/js/a11y{$suffix}.js", array(), GENERATE_VERSION, true );
+		wp_enqueue_script( 'generate-menu', $dir_uri . "/assets/v1/js/menu{$suffix}.js", array(), GENERATE_VERSION, true );
+		wp_enqueue_script( 'generate-a11y', $dir_uri . "/assets/v1/js/a11y{$suffix}.js", array(), GENERATE_VERSION, true );
 
 		if ( 'click' === generate_get_option( 'nav_dropdown_type' ) || 'click-arrow' === generate_get_option( 'nav_dropdown_type' ) ) {
-			wp_enqueue_script( 'generate-dropdown-click', $dir_uri . "/js/dropdown-click{$suffix}.js", array( 'generate-menu' ), GENERATE_VERSION, true );
+			wp_enqueue_script( 'generate-dropdown-click', $dir_uri . "/assets/v1/js/dropdown-click{$suffix}.js", array( 'generate-menu' ), GENERATE_VERSION, true );
 		}
 
 		if ( 'enable' === generate_get_option( 'nav_search' ) ) {
