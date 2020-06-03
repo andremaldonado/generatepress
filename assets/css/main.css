@@ -910,7 +910,7 @@ li.search-item.active {
 .site-main > *,
 .page-header,
 .widget-area .main-navigation {
-	margin-bottom: 50px;
+	margin-bottom: 40px;
 }
 
 .site-main {
@@ -961,9 +961,7 @@ li.search-item.active {
 }
 
 .page-header-image,
-.page-header-contained,
-.page-header-image-single,
-.page-header-content-single {
+.page-header-image-single {
 	margin-top: 40px;
 }
 
@@ -1056,10 +1054,6 @@ footer.entry-meta .posted-on {
 
 .entry-title {
 	margin-bottom: 0;
-}
-
-.page-header {
-	margin-bottom: 30px;
 }
 
 .page-header .avatar {
