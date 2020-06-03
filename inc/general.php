@@ -48,14 +48,14 @@ function generate_enqueue_scripts() {
 	}
 
 	if ( function_exists( 'wp_script_add_data' ) ) {
-		wp_enqueue_script( 'generate-classlist', $dir_uri . "/js/classList{$suffix}.js", array(), GENERATE_VERSION, true );
+		wp_enqueue_script( 'generate-classlist', $dir_uri . "/assets/js/classList{$suffix}.js", array(), GENERATE_VERSION, true );
 		wp_script_add_data( 'generate-classlist', 'conditional', 'lte IE 11' );
 	}
 
 	wp_enqueue_script( 'generate-main', $dir_uri . "/assets/js/main{$suffix}.js", array(), GENERATE_VERSION, true );
 
 	if ( 'enable' === generate_get_option( 'nav_search' ) ) {
-		wp_enqueue_script( 'generate-navigation-search', $dir_uri . "/js/navigation-search{$suffix}.js", array( 'generate-menu' ), GENERATE_VERSION, true );
+		wp_enqueue_script( 'generate-navigation-search', $dir_uri . "/assets/js/navigation-search{$suffix}.js", array( 'generate-menu' ), GENERATE_VERSION, true );
 
 		wp_localize_script(
 			'generate-navigation-search',
@@ -68,7 +68,7 @@ function generate_enqueue_scripts() {
 	}
 
 	if ( 'enable' === generate_get_option( 'back_to_top' ) ) {
-		wp_enqueue_script( 'generate-back-to-top', $dir_uri . "/js/back-to-top{$suffix}.js", array(), GENERATE_VERSION, true );
+		wp_enqueue_script( 'generate-back-to-top', $dir_uri . "/assets/js/back-to-top{$suffix}.js", array(), GENERATE_VERSION, true );
 	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -111,7 +111,7 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 		}
 
 		if ( function_exists( 'wp_script_add_data' ) ) {
-			wp_enqueue_script( 'generate-classlist', $dir_uri . "/js/classList{$suffix}.js", array(), GENERATE_VERSION, true );
+			wp_enqueue_script( 'generate-classlist', $dir_uri . "/assets/js/classList{$suffix}.js", array(), GENERATE_VERSION, true );
 			wp_script_add_data( 'generate-classlist', 'conditional', 'lte IE 11' );
 		}
 
@@ -123,7 +123,7 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 		}
 
 		if ( 'enable' === generate_get_option( 'nav_search' ) ) {
-			wp_enqueue_script( 'generate-navigation-search', $dir_uri . "/js/navigation-search{$suffix}.js", array( 'generate-menu' ), GENERATE_VERSION, true );
+			wp_enqueue_script( 'generate-navigation-search', $dir_uri . "/assets/js/navigation-search{$suffix}.js", array( 'generate-menu' ), GENERATE_VERSION, true );
 
 			wp_localize_script(
 				'generate-navigation-search',
@@ -136,7 +136,7 @@ if ( ! function_exists( 'generate_scripts' ) ) {
 		}
 
 		if ( 'enable' === generate_get_option( 'back_to_top' ) ) {
-			wp_enqueue_script( 'generate-back-to-top', $dir_uri . "/js/back-to-top{$suffix}.js", array(), GENERATE_VERSION, true );
+			wp_enqueue_script( 'generate-back-to-top', $dir_uri . "/assets/js/back-to-top{$suffix}.js", array(), GENERATE_VERSION, true );
 		}
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
