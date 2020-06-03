@@ -3,13 +3,10 @@
 --------------------------------------------------------------*/
 
 .inside-footer-widgets {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 }
 
 .inside-footer-widgets > div {
-	-ms-flex: 1 1 0px;
 	flex: 1 1 0;
 }
 
@@ -68,11 +65,7 @@
 
 .inside-top-bar {
 	padding: 10px;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
 	align-items: center;
 }
 
@@ -86,9 +79,7 @@ div.top-bar .widget {
 
 .top-bar-align-right .widget:nth-child(even),
 .top-bar-align-left .widget:nth-child(odd) {
-	-webkit-box-ordinal-group: -19;
-	    -ms-flex-order: -20;
-	        order: -20;
+	order: -20;
 }
 
 .top-bar-align-left .widget,
@@ -160,8 +151,6 @@ div.top-bar .widget {
 }
 
 .footer-bar-align-right .copyright-bar {
-	-webkit-box-ordinal-group: -19;
-	-ms-flex-order: -20;
 	order: -20;
 	margin-right: auto;
 }
@@ -211,8 +200,6 @@ div.top-bar .widget {
    --------------------------------------------------------------*/
 
    .top-bar .inside-top-bar > .widget {
-	   -webkit-box-ordinal-group: 2;
-	   -ms-flex-order: 1;
 	   order: 1;
 	   margin: 0 10px;
    }
