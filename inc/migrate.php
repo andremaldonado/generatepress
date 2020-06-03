@@ -48,6 +48,18 @@ function generate_do_db_updates() {
 		$flags['combine_css'] = 'done';
 		update_option( 'generate_migration_settings', $flags );
 	}
+
+	if ( ! isset( $flags['use_legacy'] ) || 'done' !== $flags['use_legacy'] ) {
+		if ( get_option( 'generate_db_version', false ) ) {
+			// We have a version set, so this is an existing site.
+			update_option( 'generatepress_is_legacy', true );
+			delete_option( 'generate_dynamic_css_output' );
+			delete_option( 'generate_dynamic_css_cached_version' );
+		}
+
+		$flags['use_legacy'] = 'done';
+		update_option( 'generate_migration_settings', $flags );
+	}
 }
 
 if ( ! function_exists( 'generate_update_logo_setting' ) ) {
